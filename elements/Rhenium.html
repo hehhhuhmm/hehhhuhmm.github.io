@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <title>Rhenium</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/font-awesome.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="..\style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="..\script.js"></script>
+    <script src="..\lang.js"></script>
+    <script src="element.js"></script>
+    <link rel="stylesheet" id="theme" href="..\light-mode.css" />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light nav nav-fill justify-content-between"
+      id="nav"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="..\index.html" id="brand">
+          <script>
+            indexTranslate("brand");
+          </script>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                aria-current="page"
+                href="..\index.html"
+                id="home"
+              >
+                <script>
+                  indexTranslate("home");
+                </script>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#" id="details">
+                <script>
+                  indexTranslate("details");
+                </script>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="..\his.html" id="history">
+                <script>
+                  indexTranslate("history");
+                </script>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="..\contact.html" id="contact">
+                <script>
+                  indexTranslate("contact");
+                </script>
+              </a>
+            </li>
+            <li class="nav-item" id="switch">
+              <abbr title="">
+                <button
+                  class="btn btn-sm btn-outline-secondary btn-toggle"
+                  type="button"
+                  id="mode"
+                >
+                  <script>
+                    indexTranslate("mode");
+                  </script>
+                </button>
+              </abbr>
+            </li>
+            <li class="nav-item" style="padding-left: 5px">
+              <button
+                class="btn btn-sm btn-outline-secondary btn-toggle"
+                type="button"
+                id="lang"
+                onclick="language()"
+              >
+                <script>
+                  indexTranslate("lang");
+                </script>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="sidebar">
+      <div class="top">
+        <div class="logo">
+          <span id="content"
+            ><script>
+              sidebarTranslate("content");
+            </script></span
+          >
+        </div>
+        <i class="bx bx-menu" id="toggle-menu"></i>
+      </div>
+      <div class="user">
+        <p class="bold" id="Re">
+          <script>
+            eleNameTranslate("Re");
+          </script>
+        </p>
+        <p>&ensp;/&ensp;</p>
+        <p style="font-size: 13px;" id="transition">
+          <script>
+            indexTranslate("transition");
+          </script>
+        </p>
+      </div>
+      <ul>
+        <li>
+          <a href="#properties">
+            <i class="bx bxs-flask"></i>
+            <span class="nav-item" id="props"
+              ><script>
+                sidebarTranslate("props");
+              </script></span
+            >
+          </a>
+          <span class="tooltip" id="props2">
+            <script>
+              sidebarTranslate("props2");
+            </script>
+          </span>
+        </li>
+        <li>
+          <a href="#atomStructure">
+            <i class="bx bxl-react"></i>
+            <span class="nav-item" id="structure"
+              ><script>
+                sidebarTranslate("structure");
+              </script></span
+            >
+          </a>
+          <span class="tooltip" id="structure2"
+            ><script>
+              sidebarTranslate("structure2");
+            </script></span
+          >
+        </li>
+        <li>
+          <a href="#elementHistory">
+            <i class="bx bx-book-open"></i>
+            <span class="nav-item" id="history1"
+              ><script>
+                sidebarTranslate("history1");
+              </script></span
+            >
+          </a>
+          <span class="tooltip" id="history2"
+            ><script>
+              sidebarTranslate("history2");
+            </script></span
+          >
+        </li>
+        <li>
+          <a href="#application">
+            <i class="bx bx-cog"></i>
+            <span class="nav-item" id="appli"
+              ><script>
+                sidebarTranslate("appli");
+              </script></span
+            >
+          </a>
+          <span class="tooltip" id="appli2"
+            ><script>
+              sidebarTranslate("appli2");
+            </script></span
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <div class="head">
+        <h1>
+          Rhenium
+        </h1>
+        <h2 id="group">
+          <script>
+            elementTranslate("group");
+          </script>
+        </h2>
+        <h2>
+          <script>
+            getGroup("Re");
+          </script>
+        </h2>
+        <h2 id="period">
+          <script>
+            elementTranslate("period");
+          </script>
+        </h2>
+        <h2>
+          <script>
+            getPeriod("Re");
+          </script>
+        </h2>
+      </div>
+      <hr />
+      <div class="part" id="properties">
+        <h3 id="prop">
+          <script>
+            elementTranslate("prop");
+          </script>
+        </h3>
+        <div class="col6">
+          <span id="atomicNumber"
+            ><script>
+              elementTranslate("atomicNumber");
+            </script></span
+          >
+          <span>:</span>
+          <span><script>
+            getAtomicNumber("Re");
+          </script></span>
+            <br>
+          <span id="atomicMass"
+            ><script>
+              elementTranslate("atomicMass");
+            </script></span
+          >
+          <span>:</span>
+          <span><script>
+            getAtomicMass("Re");
+          </script></span>
+            <br>
+          <span id="stateAtRoomTemperature"
+            ><script>
+              elementTranslate("stateAtRoomTemperature");
+            </script></span
+          >
+          <span>:</span>
+          <span 
+            ><script>
+              getConditions("Re");
+            </script></span
+          >
+            <br>
+          <span id="meltingPoint"
+            ><script>
+              elementTranslate("meltingPoint");
+            </script></span
+          >
+          <span>:</span>
+          <span 
+            ><script>
+              getMeltingPoints("Re");
+            </script></span
+          >
+          <span>℃</span>
+          <br>
+          <span id="boilingPoint"
+            ><script>
+              elementTranslate("boilingPoint");
+            </script></span
+          >
+          <span>:</span>
+          <span 
+          ><script>
+            getBoilingPoints("Re");
+          </script></span
+        >
+        <span>℃</span>
+        <br>
+          <span id="valenceNumber"
+            ><script>
+              elementTranslate("valenceNumber");
+            </script></span
+          >
+          <span>:</span>
+          <span 
+          ><script>
+            getValenceNumber("Re");
+          </script></span
+        >
+        <br>
+        <span id="oxidationState"
+            ><script>
+              elementTranslate("oxidationState");
+            </script></span
+          >
+          <span>:</span>
+          <span 
+          ><script>
+            getOxidationStates("Re");
+          </script></span
+        >
+        <br>
+        <span id="density"
+            ><script>
+              elementTranslate("density");
+            </script></span
+          >
+          <span>:</span>
+          <span 
+          ><script>
+            getDensity("Re");
+          </script></span
+        >
+        <span>g/cm³</span>
+        </div>
+      </div>
+      <hr />
+      <div class="part" id="atomStructure">
+        <h3 id="structure3">
+          <script>
+            elementTranslate("structure3");
+          </script>
+        </h3>
+        <div class="col6">
+          <span id="protonNumber"
+            ><script>
+              elementTranslate("protonNumber");
+            </script></span
+          >
+          <span>:</span>
+          <span><script>
+            getProtonNumber("Re")
+          </script></span>
+<br>
+          <span id="neutronNumber"
+            ><script>
+              elementTranslate("neutronNumber");
+            </script></span
+          >
+          <span>:</span>
+          <span><script>
+            getNeutronNumber("Re")
+          </script></span>
+<br>
+          <span id="electronNumber"
+            ><script>
+              elementTranslate("electronNumber");
+            </script></span
+          >
+          <span>:</span>
+          <span><script>
+            getElectronNumber("Re")
+          </script></span>
+<br>
+          <span id="electronConfig"
+            ><script>
+              elementTranslate("electronConfig");
+            </script></span
+          >
+          <span>:</span>
+          <span><script>
+            getElectronConfiguration("Re");
+          </script></span>
+        </div>
+      </div>
+      <hr />
+      <div class="part" id="elementHistory">
+        <h3 id="history3">
+          <script>
+            elementTranslate("history3");
+          </script>
+        </h3>
+        <div class="col6">
+          <span id="year"
+            ><script>
+              elementTranslate("year");
+            </script></span
+          >
+          <span>:</span>
+          <span><script>
+            getYearFound("Re");
+          </script></span>
+<br>
+          <span id="discoverer"
+            ><script>
+              elementTranslate("discoverer");
+            </script></span
+          >
+          <span>:</span>
+          <span><script>
+            getDiscoverer("Re");
+          </script></span>
+        </div>
+      </div>
+      <hr />
+      <div class="part" id="application">
+        <h3 id="appli3">
+          <script>
+            elementTranslate("appli3");
+          </script>
+        </h3>
+        <div class="col6">
+          <ul> 
+            <li><span id="appli_Re_1"
+            ><script>
+              getApplication("appli_Re_1");
+            </script></span
+          ></li>
+          <li><span id="appli_Re_2"
+            ><script>
+              getApplication("appli_Re_2");
+            </script></span
+          ></li>
+          <li><span id="appli_Re_3"
+            ><script>
+              getApplication("appli_Re_3");
+            </script></span
+          ></li>
+          </ul>
+        </div>
+      </div>
+      <hr />
+    </div>
+  </body>
+  <script>
+    window.onload = function () {
+      const theme = document.getElementById("theme");
+      const btn = document.getElementById("mode");
+      const nav = document.getElementById("nav");
+      const side = document.getElementsByClassName("sidebar")[0];
+      const main = document.getElementsByClassName("main-content")[0];
+      if (localStorage.getItem("mode") != null) {
+        if (localStorage.getItem("mode") == "light") {
+          theme.href = "..\\light-mode.css";
+          nav.classList.add("navbar-light");
+          nav.classList.add("bg-light");
+          nav.classList.remove("navbar-dark");
+          nav.classList.remove("bg-dark");
+          //side bar
+          side.classList.remove("dark");
+          side.classList.add("light");
+          //main content
+          main.classList.remove("dark");
+          main.classList.add("light");
+        } else {
+          theme.href = "..\\dark-mode.css";
+          nav.classList.remove("navbar-light");
+          nav.classList.remove("bg-light");
+          nav.classList.add("navbar-dark");
+          nav.classList.add("bg-dark");
+          //side bar
+          side.classList.remove("light");
+          side.classList.add("dark");
+          //main content
+          main.classList.remove("light");
+          main.classList.add("dark");
+        }
+      }
+      // theme choosing
+      btn.addEventListener("click", function () {
+        if (theme.getAttribute("href") == "..\\light-mode.css") {
+          theme.setAttribute("href", "..\\dark-mode.css");
+          //side bar
+          side.classList.remove("light");
+          side.classList.add("dark");
+          // main content
+          main.classList.remove("light");
+          main.classList.add("dark");
+          localStorage.setItem("mode", "dark");
+        } else {
+          theme.setAttribute("href", "..\\light-mode.css");
+          //side bar
+          side.classList.remove("dark");
+          side.classList.add("light");
+          // main content
+          main.classList.remove("dark");
+          main.classList.add("light");
+          localStorage.setItem("mode", "light");
+        }
+        if (nav.classList.contains("navbar-light")) {
+          nav.classList.remove("navbar-light");
+          nav.classList.remove("bg-light");
+          nav.classList.add("navbar-dark");
+          nav.classList.add("bg-dark");
+        } else {
+          nav.classList.add("navbar-light");
+          nav.classList.add("bg-light");
+          nav.classList.remove("navbar-dark");
+          nav.classList.remove("bg-dark");
+        }
+      });
+      let btn1 = document.getElementById("toggle-menu");
+      let sidebar = document.querySelector(".sidebar");
+
+      btn1.onclick = function () {
+        sidebar.classList.toggle("active");
+      };
+    };
+  </script>
+</html>

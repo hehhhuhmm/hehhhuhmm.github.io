@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/x-icon" href="favicon.ico" rel="shortcut icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Periodic table tutorial</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="lang.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" id="theme" href="light-mode.css">
+    <script>
+        window.onload = function () {
+    const theme = document.getElementById("theme");
+const btn = document.getElementById("mode");
+const nav = document.getElementById("nav");
+if (localStorage.getItem("mode") != null) {
+    if (localStorage.getItem("mode") == "light") {
+        theme.href = "light-mode.css";
+        nav.classList.add("navbar-light");
+        nav.classList.add("bg-light");
+        nav.classList.remove("navbar-dark");
+        nav.classList.remove("bg-dark");
+    } else {
+        theme.href = "dark-mode.css";
+        nav.classList.remove("navbar-light");
+        nav.classList.remove("bg-light");
+        nav.classList.add("navbar-dark");
+        nav.classList.add("bg-dark");
+    }
+}
+// theme choosing
+btn.addEventListener("click", function() {
+    if (theme.getAttribute("href") == "light-mode.css") {
+        theme.setAttribute("href", "dark-mode.css");
+        localStorage.setItem("mode", "dark");
+      } else {
+        theme.setAttribute("href", "light-mode.css");
+        localStorage.setItem("mode", "light");
+    }
+    if (nav.classList.contains("navbar-light")) {
+        nav.classList.remove("navbar-light");
+        nav.classList.remove("bg-light");
+        nav.classList.add("navbar-dark");
+        nav.classList.add("bg-dark");
+    } else {
+        nav.classList.add("navbar-light");
+        nav.classList.add("bg-light");
+        nav.classList.remove("navbar-dark");
+        nav.classList.remove("bg-dark");
+    }
+})
+    const search = document.getElementById("search");
+const elenamelist = ["Hydrogen",     "Helium",    "Lithium",	    "Beryllium",	    "Boron",	    "Carbon",	    "Nitrogen",	    "Oxygen",	    "Fluorine",	    "Neon",	    "Sodium",	    "Magnesium",	    "Aluminium",	    "Silicon",	    "Phosphorus",	    "Sulfur",	    "Chlorine",	    "Argon",	    "Potassium",	    "Calcium",	    "Scandium",	    "Titanium",	    "Vanadium",	    "Chromium",	    "Manganese",	    "Iron",	    "Cobalt",	    "Nickel",	    "Copper",	    "Zinc",	    "Gallium",	    "Germanium",	    "Arsenic",	    "Selenium",	    "Bromine",	    "Krypton",	    "Rubidium",	    "Strontium",	    "Yttrium",	    "Zirconium",	    "Niobium",	    "Molybdenum",	    "Technetium",	    "Ruthenium",	    "Rhodium",	    "Palladium",	    "Silver",	    "Cadmium",	    "Indium",	    "Tin",	    "Antimony",	 "Tellurium",	    "Iodine",	    "Xenon",	    "Caesium",	    "Barium",	    "Lanthanum",	    "Cerium",	    "Praseodymium",	    "Neodymium",	    "Promethium",	    "Samarium",	    "Europium",	    "Gadolinium",	    "Terbium",	    "Dysprosium",	    "Holmium",	    "Erbium",	    "Thulium",	    "Ytterbium",	    "Lutetium",	    "Hafnium",	    "Tantalum",	    "Tungsten",	    "Rhenium",	    "Osmium",	    "Iridium",	    "Platinum",	    "Gold",	    "Mercury",	    "Thallium",	    "Lead",	    "Bismuth",	    "Polonium",	    "Astatine",	    "Radon",	    "Francium",	    "Radium",	    "Actinium",	    "Thorium",	    "Protactinium",	    "Uranium",	    "Neptunium",	    "Plutonium",	    "Americium",	    "Curium",	    "Berkelium",	    "Californium",	    "Einsteinium",	    "Fermium",	    "Mendelevium",	    "Nobelium",	    "Lawrencium",	    "Rutherfordium",	    "Dubnium",	    "Seaborgium",	    "Bohrium",	    "Hassium",	   "Meitnerium",	"Darmstadtium",	    "Roentgenium",	    "Copernicium",	    "Nihonium",	    "Flerovium",	    "Moscovium",	    "Livermorium",	    "Tennessine",	    "Oganesson"]
+const elenamelist2 = ["Hidro", "Heli", "Liti", "Beri","Bo","Cacbon","Nitơ","Oxi","Flo", "Neon",  "Natri", "Magie", "Nhôm", "Silic","Photpho", "Lưu huỳnh", "Clo", "Agon","Kali", "Canxi", "Scandi", "Titan","Vanadi", "Crom", "Mangan", "Sắt", "Coban", "Niken", "Đồng", "Kẽm", "Gali", "Gecmani", "Asen", "Selen", "Brom", "Kripton", "Rubidi", "Stronti","Ytri", "Ziriconi", "Niobi", "Molipđen", "Tecnexi", "Ruteni", "Rođi", "Palađi", "Bạc", "Cadimi", "Inđi", "Thiếc", "Antimon", "Telu","Iot", "Xenon", "Xesi", "Bari", "Lantan", "Xeri", "Prazeodim", "Neoưđim", "Prometi", "Samari", "Europi", "Gađoleni", "Tebi", "Điprozi", "Honmi", "Eribi", "Tuli", "Ytecbi", "Lutexi", "Hafini", "Tantan","Vonfram", "Reni", "Osimu", "Iriđi", "Platin", "Vàng", "Thủy ngân", "Tali", "Chì", "Bitmut", "Poloni", "Atatin", "Rađon", "Franxi", "Rađi", "Actini", "Thori", "Protactini","Urani", "Neptuni", "Plutoni", "Amerixi", "Curi", "Beckeli", "Califoni", "Ensteni", "Fecmi", "Menđelevi", "Nobeli", "Lorenxi", "Rudơfo", "Dubni", "Sibogi", "Bori", "Hassi", "Meitneri", "Darmstati", "Rogheni", "Copernici", "Nihoni", "Flerovi", "Moscovi", "Livermori", "Tennessine", "Oganesson"];
+const elelist = ["H","He","Li","Be","B","C","N","O","F","Ne","Na","Mg","Al","Si","P","S","Cl","Ar","K","Ca","Sc","Ti","V","Cr","Mn","Fe","Co","Ni","Cu","Zn","Ga","Ge","As","Se","Br","Kr","Rb","Sr","Y","Zr","Nb","Mo","Tc","Ru","Rh","Pd","Ag","Cd","In","Sn","Sb","Te","I","Xe","Cs","Ba","La","Ce","Pr","Nd","Pm","Sm","Eu","Gd","Tb","Dy","Ho","Er","Tm","Yb","Lu","Hf","Ta","W","Re","Os","Ir","Pt","Au","Hg","Tl","Pb","Bi","Po","At","Rn","Fr","Ra","Ac","Th","Pa","U","Np","Pu","Am","Cm","Bk","Cf","Es","Fm","Md","No","Lr","Rf","Db","Sg","Bh","Hs","Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"]; 
+search.addEventListener('input', () => {
+    document.getElementById("actini").classList.add("blur");
+    document.getElementById("lantan").classList.add("blur");
+    elelist.forEach(function(value){
+        const ele = document.getElementById(value);
+        ele.classList.remove("glow");
+        ele.classList.remove("blur");
+        ele.classList.remove("border");
+    });
+    if (search.value != "" && search.value != null) {
+        let text = "";
+        let searchText = search.value.toLowerCase();
+        for (let i = 0; i < 118; i++) {
+            const a = document.getElementById(elelist[i]);
+            if (elelist[i].toLowerCase().startsWith(searchText)) {
+                a.classList.add("glow");
+                if (elelist[i].toLowerCase()===(searchText)) {
+                    text = elelist[i];
+                    console.log(elelist[i]);
+                } 
+            }else {
+                a.classList.add("blur");
+            }
+            if (searchText.length >= 3) {
+                if(elenamelist[i].toLowerCase().startsWith(searchText)) {
+                    text = elenamelist[i];
+                    a.classList.remove("blur");
+                    a.classList.add("glow");
+                } else if (elenamelist2[i].toLowerCase().startsWith(searchText)) {
+                    text = elenamelist2[i];
+                    a.classList.remove("blur");
+                    a.classList.add("glow");
+                }
+            } 
+        }
+        if (text != "") {
+            if (text.length > 2) {
+                let t1 = elenamelist.indexOf(text);
+                let t2 = elenamelist2.indexOf(text);
+                var ele = document.getElementById(elelist[((t1 != null) ? t1 : t2)]);
+                if (ele) {
+                    ele.classList.add("border");
+                }
+            } else {
+                document.getElementById(text).classList.add("border");
+            }
+        }
+    } else {
+        document.getElementById("actini").classList.remove("blur");
+    document.getElementById("lantan").classList.remove("blur");
+    }
+});
+}
+
+  function nonmetal() {
+const list = ["H", "N", "O", "C", "S", "P", "Se"];
+choosing(list);
+}
+
+function alkalimetal() {
+const list = ["Li", "Na", "K", "Rb", "Cs", "Fr"];
+choosing(list);
+}
+
+function alkalineearthmetal() {
+const list = ["Be", "Mg", "Ca", "Sr", "Ba", "Ra"];
+choosing(list);
+}
+
+function halogen() {
+const list = ["F", "Cl", "Br", "I", "At"];
+choosing(list);
+}
+
+function metalloid() {
+const list = ["B", "Si", "Ge", "As", "Sb", "Te", "Po"];
+choosing(list);
+}
+
+function noble() {
+const list = ["He", "Ne", "Ar", "Kr", "Xe", "Rn"];
+choosing(list);
+}
+
+function transition() {
+const list = ["Sc", "Ti", "V", "Cr", "Fe", "Mn", "Co", "Ni", "Cu", "Zn", "Y", "Zr", "Nb", "Mo", 
+"Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "Hf", 
+"Ta", "W", "Re","Os","Ir","Pt", "Au","Hg","Rf","Db", "Sg", "Bh", "Hs"];
+choosing(list);
+}
+
+function post() {
+const list = ["Al", "Ga", "In", "Sn", "Tl", "Pb", "Bi"];
+choosing(list);
+}
+
+function lan() {
+const list = ["La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu"];
+choosing(list);
+}
+
+function act() {
+const list = ["Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr"];
+choosing(list);
+}
+
+function undef() {
+const list = ["Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"];
+choosing(list);
+}
+
+function radio() {
+const list = ["Tc", "Fr", "Ra", "Ac", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og", "Bi", "Po", "At", "Rn", "Pm", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr"];
+choosing(list);
+}
+
+function choosing(listOfSymbols) {
+const link = document.getElementById("theme");
+if (link.href == "light-mode.css") {
+    listOfSymbols.forEach(function(value){
+        const ele = document.getElementById(value);
+        ele.classList.add("border");
+    }, this);
+    setTimeout(function() {
+        listOfSymbols.forEach(function(value){
+            const ele = document.getElementById(value);
+            ele.classList.remove("border");
+        }, this);
+    },3000);    
+} else {
+    elelist.forEach(function(val) {
+        const ele = document.getElementById(val);
+        if (listOfSymbols.includes(val)) {
+            ele.classList.add("glow");
+        } else{
+            ele.classList.add("blur");
+        }
+    });
+    setTimeout(function() {
+        elelist.forEach(function(val) {
+        const ele = document.getElementById(val);
+        if (listOfSymbols.includes(val)) {
+            ele.classList.remove("glow");
+        } else{
+            ele.classList.remove("blur");
+        }
+    });
+    },3000);    
+}
+    
+}
+</script>
+    <style>
+        body{
+            background-image: url('');
+            background-repeat: no-repeat;
+        }
+        #nav {
+            font-size: 15px !important;
+        }
+
+        abbr {
+            text-decoration: none !important;
+            font-size: 20px;
+            margin-top: auto;
+            background-color: transparent !important;
+            line-height: 15px;
+        }
+
+        abbr:hover {
+            cursor: pointer !important;
+        }
+
+        td {
+            height: 65px;
+            width: 65px;
+            margin: 5px;
+            border-radius: 4px;
+            border: 2px solid transparent;
+        }
+
+        td:hover {
+            cursor: pointer !important;
+        }
+
+        .elements {
+            transition: all .2s ease-in-out;
+            line-height: 10.5px;
+        }
+
+        #search-container {
+            margin-bottom: 20px;
+            width: 20%;
+            position: relative;
+        }
+
+        .elements:hover {
+            transform: scale(1.5);
+            z-index: 100;
+        }
+
+        table {
+            margin-left: 15px;
+            overflow-x: auto;
+            border: 1px;
+            margin-bottom: 15px;
+            border: none !important;
+            border-spacing: 5px 5px !important;
+            border-collapse: separate !important;
+        }
+
+        table a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        #Periodic {
+            padding-top: 35px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        td .empty {
+            empty-cells: hide;
+            border: none !important;
+        }
+
+        .atomnum {
+            float: left;
+            font-size: 10px;
+        }
+
+        .atomnum,
+        .valnum {
+            font-weight: 700;
+            line-height: 5.5px;
+        }
+
+        .valnum {
+            float: right;
+            font-size: 5.75px;
+        }
+
+        .radioactive {
+            font-size: 6.5px;
+        }
+
+        #lantan,
+        #actini {
+            text-align: center;
+            text-decoration: none  !important;
+        }
+
+        .name,
+        .mass {
+            font-size: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .cell {
+            height: 35px !important;
+            width: 150px !important;
+            padding-left: 15px;
+            padding-right: 15px;
+            font-siZe: 10px !important;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .cell span {
+            text-align: center;
+            display: inline-block;
+            padding-top: 12px;
+        }
+
+        .container1 {
+            display: inline-block;
+            text-align: center;
+        }
+
+        /*Setting for cells*/
+        .nonmetal,
+        .nonmetal abbr,
+        .nonmetal span {
+            background-color: #f1cdab;
+        }
+
+        .nonmetal abbr,
+        .nonmetal span {
+            color: #713806;
+        }
+
+        .nonmetal:hover {
+            box-shadow: 0 5px 15px rgba(241, 205, 171, .4);
+        }
+
+        .noble,
+        .noble abbr,
+        .noble span {
+            background-color: #f5ecfd;
+        }
+
+        .noble abbr,
+        .noble span {
+            color: #6232ec;
+        }
+
+        .noble:hover {
+            box-shadow: 0 5px 15px rgba(245, 236, 253, .4);
+        }
+
+        .ametal,
+        .ametal abbr,
+        .ametal span {
+            background-color: #ffebee;
+        }
+
+        .ametal abbr,
+        .ametal span {
+            color: #cd1d5e;
+        }
+
+        .ametal:hover {
+            box-shadow: 0 5px 15px rgba(255, 235, 238, .4);
+        }
+
+        .aemetal,
+        .aemetal abbr,
+        .aemetal span {
+            background-color: #e6f0ff;
+        }
+
+        .aemetal abbr,
+        .aemetal span {
+            color: #0060f0;
+        }
+
+        .aemetal:hover {
+            box-shadow: 0 5px 15px rgba(230, 240, 255, .4);
+        }
+
+        .metalloid,
+        .metalloid abbr,
+        .metalloid span {
+            background-color: #fff2c1;
+        }
+
+        .metalloid abbr,
+        .metalloid span {
+            color: #82520a;
+        }
+
+        .metalloid:hover {
+            box-shadow: 0 5px 15px rgba(255, 242, 193, .4);
+        }
+
+        .halo,
+        .halo abbr,
+        .halo span {
+            background-color: #f3c4f5;
+        }
+
+        .halo abbr,
+        .halo span {
+            color: #a800d6;
+        }
+
+        .halo:hover {
+            box-shadow: 0 5px 15px rgba(243, 196, 245, .4);
+        }
+
+        .post,
+        .post abbr,
+        .post span {
+            background-color: #cef6e3;
+        }
+
+        .post abbr,
+        .post span {
+            color: #156017;
+        }
+
+        .post:hover {
+            box-shadow: 0 5px 15px rgba(206, 246, 227, .4);
+        }
+
+        .trans,
+        .trans abbr,
+        .trans span {
+            background-color: #FFFBDA;
+        }
+
+        .trans abbr,
+        .trans span {
+            color: #c67439;
+        }
+
+        .trans:hover {
+            box-shadow: 0 5px 15px rgba(255, 251, 218, .8);
+        }
+
+        .lan,
+        .lan abbr,
+        .lan span {
+            background-color: #d6e7ff;
+        }
+
+        .lan abbr,
+        .lan span {
+            color: #1d0f9c;
+        }
+
+        .lan:hover {
+            box-shadow: 0 5px 15px rgba(214, 231, 255, .4);
+        }
+
+        .actin,
+        .actin abbr,
+        .actin span {
+            background-color: #f0c0ca;
+        }
+
+        .actin abbr,
+        .actin span {
+            color: #3D0C11;
+        }
+
+        .actin:hover {
+            box-shadow: 0 5px 15px rgba(240, 192, 202, .4);
+        }
+
+        .undef,
+        .undef abbr,
+        .undef span {
+            background-color: #c6c3b9;
+        }
+
+        .undef abbr,
+        .undef span {
+            color: #606064;
+        }
+
+        .undef:hover {
+            box-shadow: 0 5px 15px rgba(198, 195, 185, .4);
+        }
+
+        .radio {
+            background-color: #37a765;
+        }
+
+        .radio span {
+            color: #154f25;
+        }
+
+        .radio:hover {
+            box-shadow: 0 5px 15px rgba(55, 167, 101, .4);
+        }
+
+        /* Search bar*/
+        input {
+            box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+            border-radius: 16px;
+            margin-top: 15px;
+            border: 1px solid transparent;
+            height: 40px;
+            width: 280px;
+            margin-left: 650px;
+            position: absolute;
+            margin-top: 25px;
+        }
+
+        input::placeholder {
+            padding-left: 10px;
+        }
+
+        p#par1 {
+            color: black;
+            position: absolute;
+            text-align: center;
+            padding-bottom: 15px !important;
+        }
+
+        a#link,
+        a#link p {
+            cursor: pointer;
+        }
+
+        .blur {
+            filter: blur(15px);
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light nav nav-fill justify-content-between" id="nav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html" id="brand">
+                <script>
+                    indexTranslate("brand")
+                </script>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html" id="home">
+                            <script>
+                                indexTranslate("home")
+                            </script>
+                        </a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="element.html" id="details">
+                          <script>
+                            indexTranslate("details");
+                          </script>
+                        </a>
+                      </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="his.html" id="history">
+                            <script>
+                                indexTranslate("history")
+                            </script>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html" id="contact">
+                            <script>
+                                indexTranslate("contact")
+                            </script>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="switch">
+                        <abbr title="">
+                            <button class="btn btn-sm btn-outline-secondary btn-toggle" type="button" id="mode">
+                                <script>
+                                    indexTranslate("mode")
+                                </script>
+                            </button>
+                        </abbr>
+                    </li>
+                    <li class="nav-item" style="padding-left: 5px;">
+                        <button class="btn btn-sm btn-outline-secondary btn-toggle" type="button" id="lang" onclick="language()">
+                            <script>
+                                indexTranslate("lang")
+                            </script>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div id="Periodic">
+            <table>
+                <tr>
+                    <td class="empty" colspan="1"></td>
+                    <td colspan="1">IA</td>
+                    <td colspan="10">
+                        <h1 id = "title"><script>
+                            indexTranslate("title")
+                        </script></h1>
+                    </td>
+                    <td class="empty" colspan="6"></td>
+                    <div id="search-container">
+                        <input type="text" id="search" placeholder="">
+                        <script>
+                            indexTranslate("search")
+                        </script> 
+                    </div>
+                    <td colspan="1">VIIIA</td>
+                </tr>
+                <tr>
+                    <td colspan="1">1</td>
+                    <td style="width:60px" class="nonmetal elements" id="H" onclick="location.href='elements/Hydrogen.html';"><a href = "elements/Hydrogen.html"><span class="atomnum">1</span><span class="valnum">I</span><br><abbr title="Hydrogen">H</abbr><br><span class="name">
+                            <script>
+                                indexTranslate("H")
+                            </script>
+                        </span><br><span class="mass">1.0078</span></a></td>
+                        <td colspan="1">IIA</td>
+                    <td colspan="10" rowspan="1" style="width:60px" class="empty"></td>
+                    <td colspan="1">IIIA</td>
+                    <td colspan="1">IVA</td>
+                    <td colspan="1">VA</td>
+                    <td colspan="1">VIA</td>
+                    <td colspan="1">VIIA</td>
+                    <td style="width:60px" class="noble elements" id="He" onclick="location.href='elements/Helium.html';">
+                        <a href="elements/Helium.html"><span class="atomnum">2</span><span class="valnum">0</span><br><abbr title="Helium">He</abbr><br><span class="name">
+                            <script>
+                                indexTranslate("He")
+                            </script>
+                        </span><br><span class="mass">4.0026</span></a></td>
+                </tr>
+                <tr>
+                    <td colspan="1">2</td>
+                    <td style="width:60px" class="ametal elements" id="Li" onclick="location.href='elements/Lithium.html';"><a href="elements/Lithium.html"><span class="atomnum">3</span><span class="valnum">I</span><br><abbr title="Lithium">Li</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Li")
+                            </script>
+                        </span><br><span class="mass">6.941</span></a></td>
+                    <td style="width:60px" class="aemetal elements" id="Be" onclick="location.href='elements/Beryllium.html';"><a href="elements/Beryllium.html"><span class="atomnum">4</span><span class="valnum">II</span><br><abbr title="Beryllium">Be</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Be")
+                            </script>
+                        </span><br><span class="mass">9.0122</span></a></td>
+                    <td colspan="10" rowspan="1" style="width:60px" class="empty"></td>
+                    <td style="width:60px" class="metalloid elements" id="B" onclick="location.href='elements/Boron.html';"><a href="elements/Boron.html"><span class="atomnum">5</span><span class="valnum">III</span><br><abbr title="Boron">B</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("B")
+                            </script>
+                        </span><br><span class="mass">10.811</span></a></td>
+                    <td class="nonmetal elements" id="C" onclick="location.href='elements/Carbon.html';"><a href="elements/Carbon.html"><span class="atomnum">6</span><span class="valnum">II, IV</span><br><abbr title="Carbon">C</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("C")
+                            </script>
+                        </span><br><span class="mass">12.011</span></a></td>
+                    <td class="nonmetal elements" id="N" onclick="location.href='elements/Nitrogen.html';"><a href="elements/Nitrogen.html"><span class="atomnum">7</span><span class="valnum">I, II, III,...</span><br><abbr title="Nitrogen">N</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("N")
+                            </script>
+                        </span><br><span class="mass">14.007</span></a></td>
+                    <td class="nonmetal elements" id="O" onclick="location.href='elements/Oxygen.html';"><a href="elements/Oxygen.html"><span class="atomnum">8</span><span class="valnum">II</span><br><abbr title="Oxygen">O</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("O")
+                            </script>
+                        </span><br><span class="mass">15.999</span></a></td>
+                    <td class="halo elements" id="F" onclick="location.href='elements/Fluorine.html';"><a href="elements/Fluorine.html"><span class="atomnum">9</span><span class="valnum">I</span><br><abbr title="Fluorine">F</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("F")
+                            </script>
+                        </span><br><span class="mass">18.998</span></a></td>
+                    <td class="noble elements" id="Ne"><a href="elements/Neon.html"><span class="atomnum">10</span><span class="valnum">0</span><br><abbr title="Neon">Ne</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Ne")
+                            </script>
+                        </span><br><span class="mass">20.18</span></a></td>
+                </tr>
+                <tr>
+                    <td colspan="1">3</td>
+                    <td style="width:60px" class="ametal elements" id="Na"><a href="elements/Sodium.html"><span class="atomnum">11</span><span class="valnum">I</span><br><abbr title="Sodium">Na</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Na")
+                            </script>
+                        </span><br><span class="mass">22.99</span></a></td>
+                    <td class="aemetal elements" id="Mg"><a href="elements/Magnesium.html"><span class="atomnum">12</span><span class="valnum">II</span><br><abbr title="Magnesium">Mg</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Mg")
+                            </script>
+                        </span><br><span class="mass">24.305</span></a></td>
+                        <td colspan="1">IIIB</td>
+                        <td colspan="1">IVB</td>
+                        <td colspan="1">VB</td>
+                        <td colspan="1">VIB</td>
+                        <td colspan="1">VIIB</td>
+                        <td colspan="1">VIIIB</td>
+                        <td colspan="1">VIIIB</td>
+                        <td colspan="1">VIIIB</td>
+                        <td colspan="1">IB</td>
+                        <td colspan="1">IIB</td>
+                    <td class="post elements" id="Al"><a href="elements/Aluminium.html"><span class="atomnum">13</span><span class="valnum">I, III</span><br><abbr title="Aluminium">Al</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Al")
+                            </script>
+                        </span><br><span class="mass">26.982</span></a></td>
+                    <td class="metalloid elements" id="Si"><a href="elements/Silicon.html"><span class="atomnum">14</span><span class="valnum">II, IV</span><br><abbr title="Silicon">Si</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Si")
+                            </script>
+                        </span><br><span class="mass">28.086</span></a></td>
+                    <td class="nonmetal elements" id="P"><a href="elements/Phosphorus.html"><span class="atomnum">15</span><span class="valnum">III, V</span><br><abbr title="Phosphorus">P</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("P")
+                            </script>
+                        </span><br><span class="mass">30.974</span></a></td>
+                    <td class="nonmetal elements" id="S"><a href="elements/Sulfur.html"><span class="atomnum">16</span><span class="valnum">II, IV, VI</span><br><abbr title="Sulfur">S</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("S")
+                            </script>
+                        </span><br><span class="mass">32.065</span></a></td>
+                    <td class="halo elements" id="Cl"><a href="elements/Chlorine.html"><span class="atomnum">17</span><span class="valnum">I, II, III,...</span><br><abbr title="Chlorine">Cl</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Cl")
+                            </script>
+                        </span><br><span class="mass">35.453</span></a></td>
+                    <td class="noble elements" id="Ar"><a href="elements/Argon.html"><span class="atomnum">18</span><span class="valnum">0</span><br><abbr title="Argon">Ar</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Ar")
+                            </script>
+                        </span><br><span class="mass">39.948</span></a></td>
+                </tr>
+                <tr>
+                    <td colspan="1">4</td>
+                    <td style="width:60px" class="ametal elements" id="K"><a href="elements/Potassium.html"><span class="atomnum">19</span><span class="valnum">I</span><br><abbr title="Potassium">K</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("K")
+                            </script>
+                        </span><br><span class="mass">39.098</span</a>></td>
+                    <td class="aemetal elements" id="Ca"><a href="elements/Calcium.html"><span class="atomnum">20</span><span class="valnum">II</span><br><abbr title="Calcium">Ca</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Ca")
+                            </script>
+                        </span><br><span class="mass">40.078</span></a></td>
+                    <td class="trans elements" id="Sc"><a href="elements/Scandium.html"><span class="atomnum">21</span><span class="valnum">III</span><br><abbr title="Scandium">Sc</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Sc")
+                            </script>
+                        </span><br><span class="mass">44.956</span></a></td>
+                    <td class="trans elements" id="Ti"><a href="elements/Titanium.html"><span class="atomnum">22</span><span class="valnum">II, III, IV</span><br><abbr title="Titanium">Ti</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Ti")
+                            </script>
+                        </span><br><span class="mass">47.867</span></a></td>
+                    <td class="trans elements" id="V"><a href="elements/Vanadium.html"><span class="atomnum">23</span><span class="valnum">II, III, IV,...</span><br><abbr title="Vanadium">V</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("V")
+                            </script>
+                        </span><br><span class="mass">50.942</span></a></td>
+                    <td class="trans elements" id="Cr"><a href="elements/Chromium.html"><span class="atomnum">24</span><span class="valnum">II, III, IV</span><br><abbr title="Chromium">Cr</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Cr")
+                            </script>
+                        </span><br><span class="mass">51.996</span></a></td>
+                    <td class="trans elements" id="Mn"><a href="elements/Manganese.html"><span class="atomnum">25</span><span class="valnum">II, III, IV,...</span><br><abbr title="Manganese">Mn</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Mn")
+                            </script>
+                        </span><br><span class="mass">54.938</span></a></td>
+                    <td class="trans elements" id="Fe"><a href="elements/Iron.html"><span class="atomnum">26</span><span class="valnum">II, III, IV,...</span><br><abbr title="Iron">Fe</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Fe")
+                            </script>
+                        </span><br><span class="mass">55.845</span></a></td>
+                    <td class="trans elements" id="Co"><a href="elements/Cobalt.html"><span class="atomnum">27</span><span class="valnum">II, III</span><br><abbr title="Cobalt">Co</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Co")
+                            </script>
+                        </span><br><span class="mass">58.933</span></a></td>
+                    <td class="trans elements" id="Ni"><a href="elements/Nickel.html"><span class="atomnum">28</span><span class="valnum">II, III</span><br><abbr title="Nickel">Ni</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Ni")
+                            </script>
+                        </span><br><span class="mass">58.693</span></a></td>
+                    <td class="trans elements" id="Cu"><a href="elements/Copper.html"><span class="atomnum">29</span><span class="valnum">I, II</span><br><abbr title="Copper">Cu</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Cu")
+                            </script>
+                        </span><br><span class="mass">63.546</span></a></td>
+                    <td class="trans elements" id="Zn"><a href="elements/Zinc.html"><span class="atomnum">30</span><span class="valnum">II</span><br><abbr title="Zinc">Zn</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Zn")
+                            </script>
+                        </span><br><span class="mass">65.38</span></a></td>
+                    <td class="post elements" id="Ga"><a href="elements/Gallium.html"><span class="atomnum">31</span><span class="valnum">II, III</span><br><abbr title="Gallium">Ga</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Ga")
+                            </script>
+                        </span><br><span class="mass">69.723</span></a></td>
+                    <td class="metalloid elements" id="Ge"><a href="elements/Germanium.html"><span class="atomnum">32</span><span class="valnum">II, IV</span><br><abbr title="Germanium">Ge</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Ge")
+                            </script>
+                        </span><br><span class="mass">72.64</span></a></td>
+                    <td class="metalloid elements" id="As"><a href="elements/Arsenic.html"><span class="atomnum">33</span><span class="valnum">II, III, V</span><br><abbr title="Arsenic">As</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("As")
+                            </script>
+                        </span><br><span class="mass">74.922</span></a></td>
+                    <td class="nonmetal elements" id="Se"><a href="elements/Selenium.html"><span class="atomnum">34</span><span class="valnum">II, IV, VI</span><br><abbr title="Selenium">Se</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Se")
+                            </script>
+                        </span><br><span class="mass">78.96</span></a></td>
+                    <td class="halo elements" id="Br"><a href="elements/Bromine.html"><span class="atomnum">35</span><span class="valnum">I, III, IV,...</span><br><abbr title="Bromine">Br</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Br")
+                            </script>
+                        </span><br><span class="mass">79.904</span></td>
+                    <td class="noble elements" id="Kr"><a href="elements/Krypton.html"><span class="atomnum">36</span><span class="valnum">0</span><br><abbr title="Krypton">Kr</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Kr")
+                            </script>
+                        </span><br><span class="mass">83.798</span></a></td>
+                </tr>
+                <tr>
+                    <td colspan="1">5</td>
+                    <td style="width:60px" class="ametal elements" id="Rb"><a href="elements/Rubidium.html"><span class="atomnum">37</span><span class="valnum">I</span><br><abbr title="Rubidium">Rb</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Rb")
+                            </script>
+                        </span><br><span class="mass">85.468</span></a></td>
+                    <td class="aemetal elements" id="Sr"><a href="elements/Strontium.html"><span class="atomnum">38</span><span class="valnum">II</span><br><abbr title="Strontium">Sr</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Sr")
+                            </script>
+                        </span><br><span class="mass">87.62</span></a></td>
+                    <td class="trans elements" id="Y"><a href="elements/Yttrium.html"><span class="atomnum">39</span><span class="valnum">III</span><br><abbr title="Yttrium">Y</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Y")
+                            </script>
+                        </span><br><span class="mass">88.096</span></a></td>
+                    <td class="trans elements" id="Zr"><a href="elements/Zirconium.html"><span class="atomnum">40</span><span class="valnum">II, III, IV</span><br><abbr title="Zirconium">Zr</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Zr")
+                            </script>
+                        </span><br><span class="mass">91.224</span></a></td>
+                    <td class="trans elements" id="Nb"><a href="elements/Niobium.html"><span class="atomnum">41</span><span class="valnum">II, III, IV,...</span><br><abbr title="Niobium">Nb</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Nb")
+                            </script>
+                        </span><br><span class="mass">92.906</span></a></td>
+                    <td class="trans elements" id="Mo"><a href="elements/Molybdenum.html"><span class="atomnum">42</span><span class="valnum">II, III, IV,...</span><br><abbr title="Molybdenum">Mo</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Mo")
+                            </script>
+                        </span><br><span class="mass">95.95</span></a></td>
+                    <td class="trans elements" id="Tc"><a href="elements/Technetium.html"><span class="atomnum">43</span><span class="valnum">VI</span><br><abbr title="Technetium">Tc</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Tc")
+                            </script>
+                        </span><br><span class="mass">(98)</span></a></td>
+                    <td class="trans elements" id="Ru"><a href="elements/Ruthenium.html"><span class="atomnum">44</span><span class="valnum">II, III, IV,...</span><br><abbr title="Ruthenium">Ru</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Ru")
+                            </script>
+                        </span><br><span class="mass">101.07</span></a></td>
+                    <td class="trans elements" id="Rh"><a href="elements/Rhodium.html"><span class="atomnum">45</span><span class="valnum">II, III, IV,...</span><br><abbr title="Rhodium">Rh</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Rh")
+                            </script>
+                        </span><br><span class="mass">102.91</span></a></td>
+                    <td class="trans elements" id="Pd"><a href="elements/Palladium.html"><span class="atomnum">46</span><span class="valnum">II, IV, VI</span><br><abbr title="Palladium">Pd</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("Pd")
+                        </script>
+                    </span><br><span class="mass">106.42</span></a></td>
+                    <td class="trans elements" id="Ag"><a href="elements/Silver.html"></a><span class="atomnum">47</span><span class="valnum">I, II, III</span><br><abbr title="Silver">Ag</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("Ag")
+                        </script>
+                    </span><br><span class="mass">107.87</span></a></td>
+                    <td class="trans elements" id="Cd"><a href="elements/Cadmium.html"><span class="atomnum">48</span><span class="valnum">I, II</span><br><abbr title="Cadmium">Cd</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("Cd")
+                        </script>
+                    </span><br><span class="mass">112.41</span></a></td>
+                    <td class="post elements" id="In"><a href="elements/Indium.html"><span class="atomnum">49</span><span class="valnum">I, II, III</span><br><abbr title="Indium">In</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("In")
+                        </script>
+                    </span><br><span class="mass">114.82</span></a></td>
+                    <td class="post elements" id="Sn"><a href="elements/Tin.html"><span class="atomnum">50</span><span class="valnum">II, IV</span><br><abbr title="Tin">Sn</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("Sn")
+                        </script>
+                    </span><br><span class="mass">118.71</span></a></td>
+                    <td class="metalloid elements" id="Sb"><a href="elements/Antimony.html"><span class="atomnum">51</span><span class="valnum">III, IV, V</span><br><abbr title="Antimony">Sb</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("Sb")
+                        </script>
+                    </span><br><span class="mass">121.76</span></a></a></td>
+                    <td class="metalloid elements" id="Te"><a href="elements/Tellurium.html"><span class="atomnum">52</span><span class="valnum">II, IV, VI</span><br><abbr title="Tellurium">Te</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("Te")
+                        </script>
+                    </span><br><span class="mass">127.6</span></a></td>
+                    <td class="halo elements" id="I"><a href="elements/Iodine.html"><span class="atomnum">53</span><span class="valnum">I, III, IV,...</span><br><abbr title="Iodine">I</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("I")
+                        </script>
+                    </span><br><span class="mass">126.9</span></a></td>
+                    <td class="noble elements" id="Xe"><a href="elements/Xenon.html"><span class="atomnum">54</span><span class="valnum">0</span><abbr title="Xenon">Xe</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("Xe")
+                        </script>
+                    </span><br><span class="mass">131.29</span></a></td>
+                    </tr>
+                    <tr>
+                    <td colspan="1">6</td>
+                    <td style="width:60px" class="ametal elements" id="Cs"><a href="elements/Caesium.html"><span class="atomnum">55</span><span class="valnum">I</span><br><abbr title="Caesium">Cs</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("Cs")
+                        </script>
+                    </span><br><span class="mass">132.91</span></a></td>
+                    <td class="aemetal elements" id="Ba"><a href="elements/Barium.html"><span class="atomnum">56</span><span class="valnum">II</span><br><abbr title="Barium">Ba</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("Ba")
+                        </script>
+                    </span><br><span class="mass">137.33</span></a></td>
+                    <td class="lan elements" id="La"><a href="elements/Lanthanum.html"><span class="atomnum">57</span><span class="valnum">III</span><br><abbr title="Lanthanum">La</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("La")
+                        </script>
+                    </span><br><span class="mass">138.91</span></a></td>
+                    <td class="trans elements" id="Hf"><a href="elements/Hafnium.html"><span class="atomnum">72</span><span class="valnum">IV</span><br><abbr title="Hafnium">Hf</abbr><br><br><span class="name">
+                        <script>
+                            indexTranslate("Hf")
+                        </script>
+                    <td class="trans elements" id="Ta"><a href="elements/Tantalum.html"><span class="atomnum">73</span><span class="valnum">III, IV, V</span><br><abbr title="Tantalum">Ta</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Ta")
+                            </script>
+                        </span><br><span class="mass">180.95</span></a></td>
+                    <td class="trans elements" id="W"><a href="elements/Tungsten.html"><span class="atomnum">74</span><span class="valnum">II, III, IV,...</span><br><abbr title="Tungsten">W</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("W")
+                            </script>
+                        </span><br><span class="mass">183.84</span></a></td>
+                    <td class="trans elements" id="Re"><a href="elements/Rhendium.html"><span class="atomnum">75</span><span class="valnum">I, II, III,...</span><br><abbr title="Rhenium">Re</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Re")
+                            </script>
+                        </span><br><span class="mass">186.21</span></a></td>
+                    <td class="trans elements" id="Os"><a href="elements/Osmium.html"><span class="atomnum">76</span><span class="valnum">II, III, IV,...</span><br><abbr title="Osmium">Os</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Os")
+                            </script>
+                        </span><br><span class="mass">190.23</span></a></td>
+                    <td class="trans elements" id="Ir"><a href="elements/Iridium.html"><span class="atomnum">77</span><span class="valnum">I, II, III,...</span><br><abbr title="Iridium">Ir</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Ir")
+                            </script>
+                        </span><br><span class="mass">192.22</span></td>
+                    <td class="trans elements" id="Pt"><a href="elements/Platinum.html"><span class="atomnum">78</span><span class="valnum">II, IV</span><br><abbr title="Platinum">Pt</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Pt")
+                            </script>
+                        </span><br><span class="mass">195.08</span></a></td>
+                    <td class="trans elements" id="Au"><a href="elements/Gold.html"><span class="atomnum">79</span><span class="valnum">I, II, III</span><br><abbr title="Gold">Au</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Au")
+                            </script>
+                        </span><br><span class="mass">196.97</span></a></td>
+                    <td class="trans elements" id="Hg"><a href="elements/Mercury.html"><span class="atomnum">80</span><span class="valnum">I, II</span><br><abbr title="Mercury">Hg</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Hg")
+                            </script>
+                        </span><br><span class="mass">200.59</span></a></td>
+                    <td class="post elements" id="Tl"><a href="elements/Thallium.html"><span class="atomnum">81</span><span class="valnum">I, II, III</span><br><abbr title="Thallium">Tl</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Tl")
+                            </script>
+                        </span><br><span class="mass">204.38</span></a></td>
+                    <td class="post elements" id="Pb"><a href="elements/Lead.html"><span class="atomnum">82</span><span class="valnum">II, IV</span><br><abbr title="Lead">Pb</abbr><br><br><span class="name">
+                            <script>
+                                indexTranslate("Pb")
+                            </script>
+                        </span><br><span class="mass">207.2</span></a></td>
+                    <td class="post elements" id="Bi"><a href="elements/Bismuth.html"><span class="atomnum">83</span><span class="valnum">II, III, IV,...</span><br><abbr title="Bismuth">Bi</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Bi")
+                            </script>
+                        </span><br><span class="mass">208.98</span></a></td>
+                    <td class="metalloid elements" id="Po"><a href="elements/Polonium.html"><span class="atomnum">84</span><span class="valnum">II, IV, VI</span><br><abbr title="Polonium">Po</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Po")
+                            </script>
+                        </span><br><span class="mass">(209)</span></a></td>
+                    <td class="halo elements" id="At"><a href="elements/Astatine.html"></a><span class="atomnum">85</span><span class="valnum">N/A</span><br><abbr title="Astatine">At</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("At")
+                            </script>
+                        </span><br><span class="mass">(210)</span></a></td>
+                    <td class="noble elements" id="Rn"><a href="elements/Radon.html"></a><span class="atomnum">86</span><span class="valnum">0</span><br><abbr title="Radon">Rn</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Rn")
+                            </script>
+                        </span><br><span class="mass">(222)</span></a></td>
+                </tr>
+                <tr>
+                    <td colspan="1">7</td>
+                    <td style="width:60px" class="ametal elements" id="Fr"><a href="elements/Francium.html"></a><span class="atomnum">87</span><span class="valnum">N/A</span><br><abbr title="Francium">Fr</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Fr")
+                            </script>
+                        </span><br><span class="mass">(223)</span></td>
+                    <td class="aemetal elements" id="Ra"><a href="elements/Radiumhtml"><span class="atomnum">88</span><span class="valnum">II</span><br><abbr title="Radium">Ra</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Ra")
+                            </script>
+                        </span><br><span class="mass">(226)</span></a></td>
+                    <td class="actin elements" id="Ac"><a href="elements/Actinium.html"><span class="atomnum">89</span><span class="valnum">III</span><br><abbr title="Actinium">Ac</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Ac")
+                            </script>
+                        </span><br><span class="mass">(227)</span></a></td>
+                    <td class="trans elements" id="Rf"><a href="elements/Rutherfordium.html"><span class="atomnum">104</span><span class="valnum">N/A</span><br><abbr title="Rutherfordium">Rf</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Rf")
+                            </script>
+                        </span><br><span class="mass">(267)</span></a></td>
+                    <td class="trans elements" id="Db"><a href="elements/Dubnium.html"><span class="atomnum">105</span><span class="valnum">N/A</span><br><abbr title="Dubnium">Db</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Db")
+                            </script>
+                        </span><br><span class="mass">(268)</span></a></td>
+                    <td class="trans elements" id="Sg"><a href="elements/Seaborgium.html"><span class="atomnum">106</span><span class="valnum">N/A</span><br><abbr title="Seaborgium">Sg</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Sg")
+                            </script>
+                        </span><br><span class="mass">(269)</span></a></td>
+                    <td class="trans elements" id="Bh"><a href="elements/Bohrium.html"><span class="atomnum">107</span><span class="valnum">N/A</span><br><abbr title="Bohrium">Bh</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Bh")
+                            </script>
+                        </span><br><span class="mass">(270)</span></a></td>
+                    <td class="trans elements" id="Hs"><a href="elements/Hassium.html"><span class="atomnum">108</span><span class="valnum">N/A</span><br><abbr title="Hassium">Hs</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Hs")
+                            </script>
+                        </span><br><span class="mass">(269)</span></a></td>
+                    <td class="undef elements" id="Mt"><a href="elements/Meitnerium.html"><span class="atomnum">109</span><span class="valnum">N/A</span><br><abbr title="Meitnerium">Mt</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Mt")
+                            </script>
+                        </span><br><span class="mass">(277)</span></a></td>
+                    <td class="undef elements" id="Ds"><a href="elements/Darmstadtium.html"><span class="atomnum">110</span><span class="valnum">N/A</span><br><abbr title="Darmstadtium">Ds</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Ds")
+                            </script>
+                        </span><br><span class="mass">(281)</span></a></td>
+                    <td class="undef elements" id="Rg"><a href="elements/Roentgenium.html"><span class="atomnum">111</span><span class="valnum">N/A</span><br><abbr title="Roentgenium">Rg</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Rg")
+                            </script>
+                        </span><br><span class="mass">(282)</span></a></td>
+                    <td class="undef elements" id="Cn"><a href="elements/Copernicium.html"><span class="atomnum">112</span><span class="valnum">N/A</span><br><abbr title="Copernicium">Cn</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Cn")
+                            </script>
+                        </span><br><span class="mass">(285)</span></td>
+                    <td class="undef elements" id="Nh"><a href="elements/Nihonium.html"><span class="atomnum">113</span><span class="valnum">N/A</span><br><abbr title="Nihonium">Nh</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Nh")
+                            </script>
+                        </span><br><span class="mass">(286)</span></a></td>
+                    <td class="undef elements" id="Fl"><a href="elements/Flerovium.html"><span class="atomnum">114</span><span class="valnum">N/A</span><br><abbr title="Flerovium">Fl</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Fl")
+                            </script>
+                        </span><br><span class="mass">(289)</span></a></td>
+                    <td class="undef elements" id="Mc"><a href="elements/Moscovium.html"><span class="atomnum">115</span><span class="valnum">N/A</span><br><abbr title="Moscovium">Mc</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Mc")
+                            </script>
+                        </span><br><span class="mass">(290)</span></a></td>
+                    <td class="undef elements" id="Lv"><a href="elements/Livermorium.html"><span class="atomnum">116</span><span class="valnum">N/A</span><br><abbr title="Livermorium">Lv</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Lv")
+                            </script>
+                        </span><br><span class="mass">(293)</span></a></td>
+                    <td class="undef elements" id="Ts"><a href="elements/Tennessine.html"><span class="atomnum">117</span><span class="valnum">N/A</span><br><abbr title="Tennessine">Ts</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Ts")
+                            </script>
+                        </span><br><span class="mass">(294)</span></a></td>
+                    <td class="undef elements" id="Og"><a href="elements/Oganesson.html"><span class="atomnum">118</span><span class="valnum">N/A</span><br><abbr title="Oganesson">Og</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                            <script>
+                                indexTranslate("Og")
+                            </script>
+                        </span><br><span class="mass">(294)</span></a></td>
+                </tr><span class="atomnum">
+                    <tr>
+                        <td rowspan="1" colspan="20" class="empty"> </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="1" colspan="3">
+                            <h5 id="lantan">
+                                <script>
+                                    indexTranslate("lantan")
+                                </script>
+                            </h5>
+                        </td>
+                        <td style="width:60px" class="lan elements" id="Ce"><a href="elements/Ceriumhtml"><span class="atomnum">58</span><span class="valnum">III, IV</span><br><abbr title="Cerium">Ce</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Ce")
+                                </script>
+                            </span><br><span class="mass">140.12</span></a></td>
+                        <td class="lan elements" id="Pr"><a href="elements/Praseodymium.html"><span class="atomnum">59</span><span class="valnum">III</span><br><abbr title="Praseodymium">Pr</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Pr")
+                                </script>
+                            </span><br><span class="mass">140.91</span></a></td>
+                        <td class="lan elements" id="Nd"><a href="elements/Neodymium.html"><span class="atomnum">60</span><span class="valnum">III, IV</span><br><abbr title="Neodymium">Nd</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Nd")
+                                </script>
+                            </span><br><span class="mass">144.21</span></a></td>
+                        <td class="lan elements" id="Pm"><a href="elements/Promethium.html"><span class="atomnum">61</span><span class="valnum">III</span><br><abbr title="Promethium">Pm</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Pm")
+                                </script>
+                            </span><br><span class="mass">(145)</span></a></td>
+                        <td class="lan elements" id="Sm"><a href="elements/Samariumhtml"><span class="atomnum">62</span><span class="valnum">II, III</span><br><abbr title="Samarium">Sm</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Sm")
+                                </script>
+                            </span><br><span class="mass">150.36</span></a></td>
+                        <td class="lan elements" id="Eu"><a href="elements/Europium.html"><span class="atomnum">63</span><span class="valnum">II, III</span><br><abbr title="Europium">Eu</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Eu")
+                                </script>
+                            </span><br><span class="mass">151.96</span></a></td>
+                        <td class="lan elements" id="Gd"><a href="elements/Gadolinium.html"><span class="atomnum">64</span><span class="valnum">III</span><br><abbr title="Gadolinium">Gd</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Gd")
+                                </script>
+                            </span><br><span class="mass">157.25</span></a></td>
+                        <td class="lan elements" id="Tb"><a href="elements/Terbium.html"><span class="atomnum">65</span><span class="valnum">III, IV</span><br><abbr title="Terbium">Tb</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Tb")
+                                </script>
+                            </span><br><span class="mass">158.93</span></a></td>
+                        <td class="lan elements" id="Dy"><a href="elements/Dysprosium.html"><span class="atomnum">66</span><span class="valnum">III</span><br><abbr title="Dysprosium">Dy</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Dy")
+                                </script>
+                            </span><br><span class="mass">162.5</span></a></td>
+                        <td class="lan elements" id="Ho"><a href="elements/Holmium.html"><span class="atomnum">67</span><span class="valnum">III</span><br><abbr title="Holmium">Ho</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Ho")
+                                </script>
+                            </span><br><span class="mass">164.93</span></a></td>
+                        <td class="lan elements" id="Er"><a href="elements/Erbium.html"><span class="atomnum">68</span><span class="valnum">III</span><br><abbr title="Erbium">Er</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Er")
+                                </script>
+                            </span><br><span class="mass">167.26</span></a></td>
+                        <td class="lan elements" id="Tm"><a href="elements/Thulium.html"><span class="atomnum">69</span><span class="valnum">II, III</span> <br><abbr title="Thulium">Tm</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Tm")
+                                </script>
+                            </span><br><span class="mass">168.93</span></a></td>
+                        <td class="lan elements" id="Yb"><a href="elements/Ytterbium.html"><span class="atomnum">70</span><span class="valnum">II, III</span><br><abbr title="Yttterbium">Yb</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Yb")
+                                </script>
+                            </span><br><span class="mass">173.04</span></a></td>
+                        <td class="lan elements" id="Lu"><a href="elements/Lutetium.html"><span class="atomnum">71</span><span class="valnum">III</span><br><abbr title="Lutetium">Lu</abbr><br><br><span class="name">
+                                <script>
+                                    indexTranslate("Lu")
+                                </script>
+                            </span><br><span class="mass">174.97</span></a></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="1" colspan="3">
+                            <h5 id = "actini">
+                                <script>
+                                    indexTranslate("actini")
+                                </script>
+                            </h5>
+                        </td>
+                        <td style="width:60px" class="actin elements" id="Th"><a href="elements/Thorium.html"><span class="atomnum">90</span><span class="valnum">IV</span><br><abbr title="Thorium">Th</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Th")
+                                </script>
+                            </span><br><span class="mass">232.04</span></a></td>
+                        <td class="actin elements" id="Pa"><a href="elements/Protactinium.html"><span class="atomnum">91</span><span class="valnum">V</span><br><abbr title="Protactinium">Pa</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Pa")
+                                </script>
+                            </span><br><span class="mass">231.04</span></a></td>
+                        <td class="actin elements" id="U"><a href="elements/Uranium.html"><span class="atomnum">92</span><span class="valnum">II, III, IV,...</span><br><abbr title="Uranium">U</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("U")
+                                </script>
+                            </span><br><span class="mass">238.03</span></a></td>
+                        <td class="actin elements" id="Np"><a href="elements/Neptunium.html"><span class="atomnum">93</span><span class="valnum">N/A</span><br><abbr title="Neptunium">Np</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Np")
+                                </script>
+                            </span><br><span class="mass">237.05</span></a></td>
+                        <td class="actin elements" id="Pu"><a href="elements/Plutonium.html"><span class="atomnum">94</span><span class="valnum">N/A</span><br><abbr title="Plutonium">Pu</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Pu")
+                                </script>
+                            </span><br><span class="mass">(244)</span></a></td>
+                        <td class="actin elements" id="Am"><a href="elements/Americium.html"><span class="atomnum">95</span><span class="valnum">N/A</span><br><abbr title="Americium">Am</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Am")
+                                </script>
+                            </span><br><span class="mass">(243)</span></a></td>
+                        <td class="actin elements" id="Cm"><a href="elements/Curium.html"><span class="atomnum">96</span><span class="valnum">N/A</span><br><abbr title="Curium">Cm</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Cm")
+                                </script>
+                            </span><br><span class="mass">(247)</span></a></td>
+                        <td class="actin elements" id="Bk"><a href="elements/Berkelium.html"><span class="atomnum">97</span><span class="valnum">N/A</span><br><abbr title="Berkelium">Bk</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Bk")
+                                </script>
+                            </span><br><span class="mass">(247)</span></a></td>
+                        <td class="actin elements" id="Cf"><a href="elements/Californiumhtml"><span class="atomnum">98</span><span class="valnum">N/A</span><br><abbr title="Californium">Cf</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Cf")
+                                </script>
+                            </span><br><span class="mass">(251)</span></a></td>
+                        <td class="actin elements" id="Es"><a href="elements/Einsteinium.html"><span class="atomnum">99</span><span class="valnum">N/A</span><br><abbr title="Einsteinium">Es</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Es")
+                                </script>
+                            </span><br><span class="mass">(252)</span></a></td>
+                        <td class="actin elements" id="Fm"><a href="elements/Fermium.html"><span class="atomnum">100</span><span class="valnum">N/A</span><br><abbr title="Fermium">Fm</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Fm")
+                                </script>
+                            </span><br><span class="mass">(257)</span></a></td>
+                        <td class="actin elements" id="Md"><a href="elements/Mendelevium.html"><span class="atomnum">101</span><span class="valnum">N/A</span><br><abbr title="Mendelevium">Md</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Md")
+                                </script>
+                            </span><br><span class="mass">(258)</span></a></td>
+                        <td class="actin elements" id="No"><a href="elements/Nobelium.html"><span class="atomnum">102</span><span class="valnum">N/A</span> <br><abbr title="Nobelium">No</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("No")
+                                </script>
+                            </span><br><span class="mass">(259)</span></a></td>
+                        <td class="actin elements" id="Lr"><a href="elements/Lawrencium.html"><span class="atomnum">103</span><span class="valnum">N/A</span><br><abbr title="Lawrencium">Lr</abbr><br><span class="radioactive">☢️</span><br><span class="name">
+                                <script>
+                                    indexTranslate("Lr")
+                                </script>
+                            </span><br><span class="mass">(262)</span></a></td>
+                    </tr>
+            </table>
+        </div>
+        <div class="container1" style="background-color: transparent;">
+            <table>
+                <tr>
+                    <td><a href="#Periodic">
+                            <div class="radio cell" onclick="radio()"><span id = "radio">
+                                <script>
+                                    indexTranslate("radio")
+                                </script>
+                            </span></div>
+                        </a></td>
+                    <td><a href="#Periodic">
+                            <div class="nonmetal cell" onclick="nonmetal()"><span id = "nonmetal">
+                                <script>
+                                    indexTranslate("nonmetal")
+                                </script>
+                            </span></div>
+                        </a></td>
+                    <td><a href="#Periodic">
+                            <div class="ametal cell" onclick="alkalimetal()"><span id = "alkalimetal">
+                                <script>
+                                    indexTranslate("alkalimetal")
+                                </script>
+                            </span></div>
+                        </a></td>
+                    <td><a href="#Periodic">
+                            <div class="aemetal cell" onclick="alkalineearthmetal()"><span id ="alkalineearthmetal">
+                                <script>
+                                    indexTranslate("alkalineearthmetal")
+                                </script>
+                            </span></div>
+                        </a></td>
+                    <td><a href="#Periodic">
+                            <div class="metalloid cell" onclick="metalloid()"><span id = "metalloid"><script>
+                                indexTranslate("metalloid")
+                            </script></span></div>
+                        </a></td>
+                    <td><a href="#Periodic">
+                            <div class="halo cell" onclick="halogen()"><span id = "halogen"><script>
+                                indexTranslate("halogen")
+                            </script></span></div>
+                        </a></td>
+                </tr>
+                <tr>
+                    <td><a href="#Periodic">
+                            <div class="noble cell" onclick="noble()"><span id = "noble"><script>
+                                indexTranslate("noble")
+                            </script></span></div>
+                        </a></td>
+                    <td><a href="#Periodic">
+                            <div class="post cell" onclick="post()"><span id = "post" style="font-size: 9px;"><script>
+                                indexTranslate("post")
+                            </script></span></div>
+                        </a></td>
+                    <td><a href="#Periodic">
+                            <div class="trans cell" onclick="transition()"><span id = "transition"><script>
+                                indexTranslate("transition")
+                            </script></span></div>
+                        </a></td>
+                    <td><a href="#Periodic">
+                            <div class="lan cell" onclick="lan()"><span id = "lantan1"><script>
+                                indexTranslate("lantan1")
+                            </script></span></div>
+                        </a></td>
+                    <td><a href="#Periodic">
+                            <div class="actin cell" onclick="act()"><span id = "actini1"><script>
+                                indexTranslate("actini1")
+                            </script></span></div>
+                        </a></td>
+                    <td><a href="#Periodic">
+                            <div class="undef cell" style="width: 175px !important;" onclick="undef()"><span style="font-size: 9px !important;" id = "undef"><script>
+                                indexTranslate("undef")
+                            </script></span></div>
+                        </a></td>
+                </tr>
+            </table>
+        </div>
+    </main>
+    <footer class="footer">
+        <span>2024 ©<a href="index.html">Periodic Table</a></span>
+        <span>∘</span>
+        <span><a href="https://vinschool.edu.vn/" id="intro"><script>indexTranslate("intro")</script></a></span> 
+        <span>∘</span>
+        <span><a href="https://www.facebook.com/minhchau.van.3781/" id = "face"><script>indexTranslate("face")</script></a></span>
+        <span>∘</span>
+        <span><a href="mailto:chau024929@stu.vinschool.edu.vn" id = "mail"><script>indexTranslate("mail")</script></a></span>
+        <span>∘</span>
+        <span><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" style="text-decoration: none !important;" id = "rick"><script>indexTranslate("rick")</script></a></span>
+    </footer>
+</body>
+
+</html>

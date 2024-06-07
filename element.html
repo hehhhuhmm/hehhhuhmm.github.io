@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/x-icon" href="favicon.ico" rel="shortcut icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Element details</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="lang.js"></script>
+    <script src="script.js"></script>
+    <script src="/elements/element.js"></script>
+    <link rel="stylesheet" id="theme" href="light-mode.css">
+    <style>
+        #elementSearch{
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+            color: black;
+            border: none;
+            width: calc(100% - 316px);
+            height: 40px;
+            margin: 16px;
+            text-align: center;
+            font-size: 24px;
+            border-radius: 24px;
+            box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+            height: 52px;
+        }
+      
+        #searchElement {
+            margin-top: 30px;
+        }
+        .card{
+            margin: 40px;
+            background-color: white;
+            max-height: fit-content;
+        }
+        .row{
+            margin-left: 60px;
+        }
+        table{
+            font-size: 12px !important;
+        }
+        h7, th span{
+            font-weight: 600 !important;
+        }
+        table{
+            border-top: 1px solid black;
+        }
+        .read {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .card-body{
+            padding-left: 1px !important;
+        }
+        .div-img img {
+            max-width: 70% !important;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            elementsTranslate("group");
+            elementsTranslate("period");
+            elementsTranslate("atomicNumber");
+            elementsTranslate("atomicMass");
+            elementsTranslate("valenceNumber");
+            const theme = document.getElementById("theme");
+const btn = document.getElementById("mode");
+const nav = document.getElementById("nav");
+if (localStorage.getItem("mode") != null) {
+    if (localStorage.getItem("mode") == "light") {
+        theme.href = "light-mode.css";
+        nav.classList.add("navbar-light");
+        nav.classList.add("bg-light");
+        nav.classList.remove("navbar-dark");
+        nav.classList.remove("bg-dark");
+    } else {
+        theme.href = "dark-mode.css";
+        nav.classList.remove("navbar-light");
+        nav.classList.remove("bg-light");
+        nav.classList.add("navbar-dark");
+        nav.classList.add("bg-dark");
+    }
+}
+// theme choosing
+btn.addEventListener("click", function() {
+    if (theme.getAttribute("href") == "light-mode.css") {
+        theme.setAttribute("href", "dark-mode.css");
+        localStorage.setItem("mode", "dark");
+      } else {
+        theme.setAttribute("href", "light-mode.css");
+        localStorage.setItem("mode", "light");
+    }
+    if (nav.classList.contains("navbar-light")) {
+        nav.classList.remove("navbar-light");
+        nav.classList.remove("bg-light");
+        nav.classList.add("navbar-dark");
+        nav.classList.add("bg-dark");
+    } else {
+        nav.classList.add("navbar-light");
+        nav.classList.add("bg-light");
+        nav.classList.remove("navbar-dark");
+        nav.classList.remove("bg-dark");
+    }
+})
+        const langBtn = document.getElementById("lang");
+
+var input = document.getElementById("elementSearch");
+        const elenamelist = ["Hydrogen",     "Helium",    "Lithium",	    "Beryllium",	    "Boron",	    "Carbon",	    "Nitrogen",	    "Oxygen",	    "Fluorine",	    "Neon",	    "Sodium",	    "Magnesium",	    "Aluminium",	    "Silicon",	    "Phosphorus",	    "Sulfur",	    "Chlorine",	    "Argon",	    "Potassium",	    "Calcium",	    "Scandium",	    "Titanium",	    "Vanadium",	    "Chromium",	    "Manganese",	    "Iron",	    "Cobalt",	    "Nickel",	    "Copper",	    "Zinc",	    "Gallium",	    "Germanium",	    "Arsenic",	    "Selenium",	    "Bromine",	    "Krypton",	    "Rubidium",	    "Strontium",	    "Yttrium",	    "Zirconium",	    "Niobium",	    "Molybdenum",	    "Technetium",	    "Ruthenium",	    "Rhodium",	    "Palladium",	    "Silver",	    "Cadmium",	    "Indium",	    "Tin",	    "Antimony",	 "Tellurium",	    "Iodine",	    "Xenon",	    "Caesium",	    "Barium",	    "Lanthanum",	    "Cerium",	    "Praseodymium",	    "Neodymium",	    "Promethium",	    "Samarium",	    "Europium",	    "Gadolinium",	    "Terbium",	    "Dysprosium",	    "Holmium",	    "Erbium",	    "Thulium",	    "Ytterbium",	    "Lutetium",	    "Hafnium",	    "Tantalum",	    "Tungsten",	    "Rhenium",	    "Osmium",	    "Iridium",	    "Platinum",	    "Gold",	    "Mercury",	    "Thallium",	    "Lead",	    "Bismuth",	    "Polonium",	    "Astatine",	    "Radon",	    "Francium",	    "Radium",	    "Actinium",	    "Thorium",	    "Protactinium",	    "Uranium",	    "Neptunium",	    "Plutonium",	    "Americium",	    "Curium",	    "Berkelium",	    "Californium",	    "Einsteinium",	    "Fermium",	    "Mendelevium",	    "Nobelium",	    "Lawrencium",	    "Rutherfordium",	    "Dubnium",	    "Seaborgium",	    "Bohrium",	    "Hassium",	   "Meitnerium",	"Darmstadtium",	    "Roentgenium",	    "Copernicium",	    "Nihonium",	    "Flerovium",	    "Moscovium",	    "Livermorium",	    "Tennessine",	    "Oganesson"]
+        const elenamelist2 = ["Hidro", "Heli", "Liti", "Beri","Bo","Cacbon","Nitơ","Oxi","Flo", "Neon",  "Natri", "Magie", "Nhôm", "Silic","Photpho", "Lưu huỳnh", "Clo", "Agon","Kali", "Canxi", "Scandi", "Titan","Vanadi", "Crom", "Mangan", "Sắt", "Coban", "Niken", "Đồng", "Kẽm", "Gali", "Gecmani", "Asen", "Selen", "Brom", "Kripton", "Rubidi", "Stronti","Ytri", "Ziriconi", "Niobi", "Molipđen", "Tecnexi", "Ruteni", "Rođi", "Palađi", "Bạc", "Cadimi", "Inđi", "Thiếc", "Antimon", "Telu","Iot", "Xenon", "Xesi", "Bari", "Lantan", "Xeri", "Prazeodim", "Neoưđim", "Prometi", "Samari", "Europi", "Gađoleni", "Tebi", "Điprozi", "Honmi", "Eribi", "Tuli", "Ytecbi", "Lutexi", "Hafini", "Tantan","Vonfram", "Reni", "Osimu", "Iriđi", "Platin", "Vàng", "Thủy ngân", "Tali", "Chì", "Bitmut", "Poloni", "Atatin", "Rađon", "Franxi", "Rađi", "Actini", "Thori", "Protactini","Urani", "Neptuni", "Plutoni", "Amerixi", "Curi", "Beckeli", "Califoni", "Ensteni", "Fecmi", "Menđelevi", "Nobeli", "Lorenxi", "Rudơfo", "Dubni", "Sibogi", "Bori", "Hassi", "Meitneri", "Darmstati", "Rogheni", "Copernici", "Nihoni", "Flerovi", "Moscovi", "Livermori", "Tennessine", "Oganesson"];
+        const elelist = ["H","He","Li","Be","B","C","N","O","F","Ne","Na","Mg","Al","Si","P","S","Cl","Ar","K","Ca","Sc","Ti","V","Cr","Mn","Fe","Co","Ni","Cu","Zn","Ga","Ge","As","Se","Br","Kr","Rb","Sr","Y","Zr","Nb","Mo","Tc","Ru","Rh","Pd","Ag","Cd","In","Sn","Sb","Te","I","Xe","Cs","Ba","La","Ce","Pr","Nd","Pm","Sm","Eu","Gd","Tb","Dy","Ho","Er","Tm","Yb","Lu","Hf","Ta","W","Re","Os","Ir","Pt","Au","Hg","Tl","Pb","Bi","Po","At","Rn","Fr","Ra","Ac","Th","Pa","U","Np","Pu","Am","Cm","Bk","Cf","Es","Fm","Md","No","Lr","Rf","Db","Sg","Bh","Hs","Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"]; 
+        input.addEventListener('input', () => {
+            elelist.forEach(function (val) {
+                document.getElementById(val).style.display = "flex";
+            });
+    if (search.value != "" && search.value != null) {
+        let text = "";
+        let searchText = search.value.toLowerCase();
+        for (let i = 0; i < 118; i++) {
+            const a = document.getElementById(elelist[i]+"1");
+            if (elelist[i].toLowerCase().startsWith(searchText)) {
+                if (elelist[i].toLowerCase()===(searchText)) {
+                    text = elelist[i];
+                    console.log(elelist[i]);
+                } 
+            }else {
+                a.style.display = "none";
+            }
+            if (searchText.length >= 3) {
+                if(elenamelist[i].toLowerCase().startsWith(searchText)) {
+                    text = elenamelist[i];
+                } else if (elenamelist2[i].toLowerCase().startsWith(searchText)) {
+                    a.style.display = "none";
+                }
+            } 
+        }
+        if (text != "") {
+            if (text.length > 2) {
+                let t1 = elenamelist.indexOf(text);
+                let t2 = elenamelist2.indexOf(text);
+                var ele = document.getElementById(elelist[((t1 != null) ? t1 : t2)]);
+                if (ele) {
+                    ele.classList.add("border");
+                }
+            } else {
+                document.getElementById(text).classList.add("border");
+            }
+        }
+    } 
+        });
+        }
+        alert("This site is still in progress! The creator will update in the future!");
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light nav nav-fill justify-content-between" id="nav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html" id="brand">
+                <script>
+                    indexTranslate("brand")
+                </script>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html" id="home">
+                            <script>
+                                indexTranslate("home")
+                            </script>
+                        </a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link active" href="element.html" id="details">
+                          <script>
+                            indexTranslate("details");
+                          </script>
+                        </a>
+                      </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="his.html" id="history">
+                            <script>
+                                indexTranslate("history")
+                            </script>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html" id="contact">
+                            <script>
+                                indexTranslate("contact")
+                            </script>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="switch">
+                        <abbr title="">
+                            <button class="btn btn-sm btn-outline-secondary btn-toggle" type="button" id="mode">
+                                <script>
+                                    indexTranslate("mode")
+                                </script>
+                            </button>
+                        </abbr>
+                    </li>
+                    <li class="nav-item" style="padding-left: 5px;">
+                        <button class="btn btn-sm btn-outline-secondary btn-toggle" type="button" id="lang" onclick="language()">
+                            <script>
+                                indexTranslate("lang")
+                            </script>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <h1>Element details</h1>
+        <div id="searchElement">
+            <input class="input" type="text" placeholder="" id="elementSearch">
+            <script>
+                indexTranslate("search")
+            </script>
+        </div>
+        <div class="row">
+            <div class="card w-25" id = "H1">
+                <div class="card-img-top d-flex align-items-center">
+                    <div class="div-img">
+                        <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Electron_shell_001_Hydrogen_-_no_label.svg/800px-Electron_shell_001_Hydrogen_-_no_label.svg.png" alt="Hydrogen electron shell">
+                    </div>
+                    <div class="card-body col p-2 m-0">
+                        <h5 class="card-title" id = "H"><script>
+                            eleNameTranslate("H")
+                        </script></h5>
+                        <div class="card-text">
+                            <table>
+                                <tr>
+                                    <th><h6 class="group">
+                                    </h6></th>
+                                    <th><h6><script>getGroup("H");</script></h6></th>
+                                </tr>
+                                <tr>
+                                    <th><h6 class="period">
+                                    </h6></th>
+                                    <th><h6><script>getPeriod("H");</script></h6></th>
+                                </tr>
+                                <tr>
+                                    <th><h7 class="atomicNumber">
+                                    </h7></th>
+                                    <th><h6><script>getAtomicNumber("H");</script></h6></th>
+                                </tr>
+                                <tr>
+                                    <th><h7 class="atomicMass">
+                                    </h7></th>
+                                    <th><h7><script>getAtomicMass("H");</script></h7></th>
+                                </tr>
+                                <tr>
+                                    <th><h7 class="valenceNumber">
+                                    </h7></th>
+                                    <th><h6><script>getValenceNumber("H");</script></h6></th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>  
+                <a href="/elements/Hydrogen.html" class="btn btn-primary read">
+                    <script>
+                        elementsTranslate("read");    
+                    </script>
+                </a>         
+            </div>
+        </div>
+        </div>
+</body>
+</html>

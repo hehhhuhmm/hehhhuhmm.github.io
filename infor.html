@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>About Us</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="image/x-icon" href="favicon.ico" rel="shortcut icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+    <script src="lang.js"></script>
+    <link rel="stylesheet" id="theme" href="dark-mode.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #fff5ea;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        background-color: #fde9d3;
+        padding: 30px;
+        box-shadow: 0px 0px 10px rgba(253, 233, 211, 0.1);
+        border-radius: 23px;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .header h1 {
+        font-size: 36px;
+        margin: 0px;
+      }
+      .header p {
+        font-size: 20px;
+        margin: 10px 0;
+      }
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -15px;
+      }
+      .profile {
+        flex: 1 0 200px;
+        margin: 15px;
+        background-color: #dfb78b94;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding: 20px;
+        text-align: center;
+        border-radius: 20px;
+        transition: 0.3s all ease-in-out;
+      }
+
+      p {
+        color: black !important;
+      }
+      .profile:hover {
+        transform: scale(1.1);
+      }
+
+      .profile img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+      .profile h2,
+      h3 {
+        margin: 0;
+        margin-bottom: 10px;
+      }
+      .profile p {
+        margin: 0;
+      }
+
+      a#email {
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+      }
+
+      a#email:hover {
+        text-decoration: underline !important;
+      }
+
+      h3 {
+        color: #565554 !important;
+        font-size: 15px;
+      }
+      .pr {
+        list-style-type: none !important;
+        display: inline-block;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        const theme = document.getElementById("theme");
+        const btn = document.getElementById("mode");
+        const nav = document.getElementById("nav");
+
+        if (localStorage.getItem("mode") != null) {
+          if (localStorage.getItem("mode") == "light") {
+            theme.href = "light-mode.css";
+            nav.classList.add("navbar-light");
+            nav.classList.add("bg-light");
+            nav.classList.remove("navbar-dark");
+            nav.classList.remove("bg-dark");
+          } else {
+            theme.href = "dark-mode.css";
+            nav.classList.remove("navbar-light");
+            nav.classList.remove("bg-light");
+            nav.classList.add("navbar-dark");
+            nav.classList.add("bg-dark");
+          }
+        }
+        // theme choosing
+        btn.addEventListener("click", function () {
+          if (theme.getAttribute("href") == "light-mode.css") {
+            theme.setAttribute("href", "dark-mode.css");
+            localStorage.setItem("mode", "dark");
+          } else {
+            theme.setAttribute("href", "light-mode.css");
+            localStorage.setItem("mode", "light");
+          }
+          if (nav.classList.contains("navbar-light")) {
+            nav.classList.remove("navbar-light");
+            nav.classList.remove("bg-light");
+            nav.classList.add("navbar-dark");
+            nav.classList.add("bg-dark");
+          } else {
+            nav.classList.add("navbar-light");
+            nav.classList.add("bg-light");
+            nav.classList.remove("navbar-dark");
+            nav.classList.remove("bg-dark");
+          }
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light nav nav-fill justify-content-between" id="nav">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="index.html" id="brand">
+              <script>
+                  indexTranslate("brand")
+              </script>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="index.html" id="home">
+                          <script>
+                              indexTranslate("home")
+                          </script>
+                      </a>
+                  </li> 
+                  <li class="nav-item">
+                      <a class="nav-link active" href="element.html" id="details">
+                        <script>
+                          indexTranslate("details");
+                        </script>
+                      </a>
+                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="his.html" id="history">
+                          <script>
+                              indexTranslate("history")
+                          </script>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="contact.html" id="contact">
+                          <script>
+                              indexTranslate("contact")
+                          </script>
+                      </a>
+                  </li>
+                  <li class="nav-item" id="switch">
+                      <abbr title="">
+                          <button class="btn btn-sm btn-outline-secondary btn-toggle" type="button" id="mode">
+                              <script>
+                                  indexTranslate("mode")
+                              </script>
+                          </button>
+                      </abbr>
+                  </li>
+                  <li class="nav-item" style="padding-left: 5px;">
+                      <button class="btn btn-sm btn-outline-secondary btn-toggle" type="button" id="lang" onclick="language()">
+                          <script>
+                              indexTranslate("lang")
+                          </script>
+                      </button>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+    <div class="container">
+      <div class="header">
+        <h2 id="title2">Sơ lược thông tin nguyên tố</h2>
+        <h5 id="introduction">
+          Số khối, số hiệu nguyên tử, số proton, số neutron, số electron, hóa
+          trị
+        </h5>
+      </div>
+      <div class="content">
+        <div class="profile">
+          <h2>Hydrogen</h2>
+          <table>
+            <tr>
+              <td>
+                <p>Số khối:</p>
+                <p>123</p>
+              </td>
+            </tr>
+
+            <p>Số hiệu nguyên tử:</p>
+            <p style="float: right">123</p>
+
+            <p>Số Proton:</p>
+            <p style="float: right">123</p>
+
+            <p>Số Neutron:</p>
+            <p style="float: right">123</p>
+
+            <p>Số Electron:</p>
+            <p style="float: right">123</p>
+
+            <p>Hóa trị:</p>
+            <p style="float: right">123</p>
+          </table>
+        </div>
+        <div class="profile">
+          <img src="dluong.jpg" alt="Profile picture" />
+          <h2>Nguyễn Đỗ Đức Lương</h2>
+          <h3>MagicLuong</h3>
+          <p id="role-web2">
+            <script>
+              contactTranslate("role-web2");
+            </script>
+            <br />
+          </p>
+          <a id="email" href="mailto:luong024624@stu.vinschool.edu.vn"
+            >luong024624@stu.vinschool.edu.vn</a
+          >
+        </div>
+        <div class="profile">
+          <img src="vtmc.jpg" alt="Profile picture" />
+          <h2>Văn Trọng Minh Châu</h2>
+          <h3>Chong</h3>
+          <p id="lead">
+            <script>
+              contactTranslate("lead");
+            </script>
+          </p>
+          <a id="email" href="mailto:chau024929@stu.vinschool.edu.vn"
+            >chau024929@stu.vinschool.edu.vn
+          </a>
+        </div>
+        <div class="profile">
+          <img src="tmee.jpg" alt="Profile picture" />
+          <h2>Nguyễn Thu Minh</h2>
+          <h3>Tmee</h3>
+          <p id="des">
+            <script>
+              contactTranslate("des");
+            </script>
+            <br />
+          </p>
+          <a id="email" href="mailto:minh000593@stu.vinschool.edu.vn"
+            >minh000593@stu.vinschool.edu.vn</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+  <footer class="footer">
+    <span>2024 ©<a href="index.html">Periodic Table</a></span>
+    <span>∘</span>
+    <span
+      ><a href="https://vinschool.edu.vn/" id="intro"
+        ><script>
+          indexTranslate("intro");
+        </script></a
+      ></span
+    >
+    <span>∘</span>
+    <span
+      ><a href="https://www.facebook.com/minhchau.van.3781/" id="face"
+        ><script>
+          indexTranslate("face");
+        </script></a
+      ></span
+    >
+    <span>∘</span>
+    <span
+      ><a href="mailto:chau024929@stu.vinschool.edu.vn" id="mail"
+        ><script>
+          indexTranslate("mail");
+        </script></a
+      ></span
+    >
+    <span>∘</span>
+    <span
+      ><a
+        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        target="_blank"
+        style="text-decoration: none !important"
+        id="rick"
+        ><script>
+          indexTranslate("rick");
+        </script></a
+      ></span
+    >
+  </footer>
+</html>

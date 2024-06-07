@@ -1,0 +1,291 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+.sidebar {
+  float: left;
+  position:fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 80px;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.5s ease;
+}
+.sidebar ul, .sidebar div {
+  position: relative;
+}
+.sidebar div{
+  margin-top: 90px;
+}
+.sidebar.light {
+  background-color: #f3e5d8 !important;
+}
+.sidebar.dark {
+  background-color: #1d2124 !important;
+}
+.sidebar.light span,
+.sidebar.light p,
+.sidebar.light a,
+.sidebar.light i,
+.sidebar.light button,
+.sidebar.light div {
+  color: black !important;
+}
+.sidebar.dark span,
+.sidebar.dark p,
+.sidebar.dark a,
+.sidebar.dark i,
+.sidebar.dark button,
+.sidebar.dark div {
+  color: white !important;
+}
+.sidebar.dark {
+  background-color: #1d2124 !important;
+}
+.main-content.dark {
+  background-color: #212529 !important;
+  color: white !important;
+}
+h1{
+  max-width: fit-content !important;
+  display: inline !important;
+}
+.main-content.dark h1 {
+  color: white !important;
+}
+.main-content.light {
+  background-color: #fefaf5;
+  color: black !important;
+}
+.main-content.light h1 {
+  color: black !important;
+}
+.sidebar.active ~ .main-content {
+  left: 250px;
+  width: calc(100%-250px);
+}
+
+.sidebar.active {
+  width: 250px;
+}
+
+.sidebar #toggle-menu {
+  position: absolute;
+  color: white;
+  top: 0.4rem;
+  left: 50%;
+  font-size: 1.2rem;
+  line-height: 50px;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.sidebar.active #toggle-menu {
+  left: 90%;
+}
+.sidebar .user p {
+  font-size: 2px;
+}
+.sidebar.active .user p {
+  font-size: 16px;
+}
+.sidebar .top .logo {
+  color: white;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+}
+.sidebar.active .top .logo {
+  opacity: 1;
+}
+.sidebar.active {
+  opacity: 1;
+}
+.sidebar ul li a span {
+  font-size: 2px;
+}
+.sidebar.active ul li a span {
+  font-size: 16px;
+}
+.sidebar.active ul li a span#reaction {
+  font-size: 13px;
+}
+.top .logo i {
+  font-size: 2rem;
+  margin-right: 5px;
+}
+i#vol{
+  display: inline-block;
+  font-size: 28px;
+}
+.user {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.user p {
+  color: white;
+  opacity: 0;
+  margin-left: 1rem;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.sidebar.active p {
+  opacity: 1;
+}
+
+.sidebar ul {
+  padding-left: 0 !important;
+}
+
+.sidebar ul li {
+  position: relative;
+  list-style-type: none;
+  height: 50px !important;
+  width: 90%;
+  margin: 0.8rem auto;
+  /* line-height: 50px; */
+}
+
+.sidebar ul li a {
+  color: white;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 0.8rem;
+}
+
+.sidebar.dark ul li a:hover {
+  background-color: grey;
+}
+
+.sidebar.light ul li a:hover {
+  background-color: #e0d6cc;
+}
+
+.sidebar ul li a i {
+  min-width: 50px;
+  text-align: center;
+  height: 50px;
+  border-radius: 12px;
+  line-height: 50px;
+}
+
+.sidebar .nav-item {
+  opacity: 0;
+}
+
+.sidebar.active .nav-item {
+  opacity: 1;
+}
+.sidebar ul li .tooltip {
+  position: absolute;
+  background-color: whitesmoke;
+  color: black !important;
+  left: 145px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.6rem;
+  padding: 0.4rem 1.2rem;
+  line-height: 1.8rem;
+  display: none;
+  opacity: 0;
+  font-size: 12px;
+  min-width: 145px;
+  text-align: center;
+}
+
+.sidebar ul li:hover .tooltip {
+  opacity: 1;
+  display: block;
+  z-index: 8000;
+}
+
+.sidebar.active ul li .tooltip {
+  display: none;
+}
+
+/* main content */
+.main-content {
+  padding-top: 100px;
+  position: absolute;
+  min-height: 100vh;
+  top: 0;
+  padding-left: 110px;
+  transition: all 0.5s ease;
+  width: 100%;
+  z-index: -1 !important;
+  text-align: left !important;
+}
+
+.main-content img {
+  height: 250px;
+  float: right;
+  display: block;
+  position: relative;
+  margin-right: 150px;
+}
+
+.main-content h2 {
+  display: inline-block;
+  padding: 7px;
+}
+
+.containter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.head h1{
+  text-align: left !important;
+  text-align: left;
+  line-height: 45px;
+  margin-bottom: 27px;
+}
+
+
+hr {
+  width: calc(100% - 110px);
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+}
+
+.part,
+.part h3 {
+  text-align: left !important;
+  font-size: 15px;
+}
+
+.part h3 {
+  font-size: 22px !important;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+.main-content div.col6 {
+  float: left;
+  width: 66.66666%;
+  line-height: 30px;
+
+}
+
+.main-content div.col3 {
+  float: right;
+  width: 33.33333%;
+}
+
+i#vol:hover {
+ cursor: pointer;
+}

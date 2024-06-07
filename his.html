@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <title>History</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <script src="lang.js"></script>
+    <link rel="stylesheet" id="theme" href="light-mode.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      .nav {
+        background-color: transparent;
+        padding-left: 20px;
+      }
+
+      body {
+        color: #1ed760;
+        /* Màu chữ xanh như ok */
+      }
+
+      .timeline-section {
+        background-color: #212529;
+        /* Màu nền timeline */
+        min-height: 100vh;
+        padding: 80px 15px;
+      }
+
+      .timeline-items {
+        max-width: 1000px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+      }
+
+      .timeline-items::before {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 100%;
+        background-color: #2f363e;
+        /* Màu gạch timeline */
+        left: calc(50% - 1px);
+      }
+
+      .timeline-item {
+        margin-bottom: 40px;
+        width: 100%;
+        position: relative;
+      }
+
+      .timeline-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .timeline-item:nth-child(odd) {
+        padding-right: calc(50% + 30px);
+        text-align: right;
+      }
+
+      .timeline-item:nth-child(odd) .verified-badge {
+        right: calc(50% - 5px);
+      }
+
+      .timeline-item:nth-child(odd) .verified-message {
+        transform: translateX(+140%);
+      }
+
+      .timeline-item:nth-child(even) {
+        padding-left: calc(50% + 30px);
+        text-align: left;
+      }
+
+      .timeline-item:nth-child(even) .verified-badge {
+        left: calc(50% - 5px);
+      }
+
+      .timeline-item:nth-child(even) .verified-message {
+        transform: translateX(-35%);
+      }
+
+      .timeline-dot {
+        height: 16px;
+        width: 16px;
+        background-color: #1ed760;
+        /* Màu chấm timeline */
+        position: absolute;
+        left: calc(50% - 8px);
+        border-radius: 50%;
+        top: 10px;
+      }
+
+      .timeline-date {
+        font-size: 18px;
+        color: #1ed760;
+        /* Màu ngày tháng */
+        margin: 6px 0 15px;
+      }
+
+      .timeline-content {
+        background-color: #2f363e;
+        /* Màu nền nội dung timeline */
+        padding: 30px;
+        border-radius: 5px;
+      }
+
+      .timeline-content h3 {
+        font-size: 20px;
+        color: #ffffff;
+        /* Màu tiêu đề */
+        margin: 0 0 10px;
+        text-transform: capitalize;
+        font-weight: 500;
+      }
+
+      .timeline-content p {
+        color: #c8c8c8;
+        /* Màu nội dung */
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 22px;
+      }
+
+      /* CSS cho chế độ tối */
+      body.dark-mode {
+        background-color: #212529 !important;
+        /* Màu nền tối */
+        color: #1ed760;
+        /* Màu chữ xanh như cc */
+      }
+
+      .dark-mode .timeline-section {
+        background-color: #212529;
+        /* Màu nền timeline */
+      }
+
+      .dark-mode .timeline-items::before {
+        background-color: #2f363e;
+        /* Màu gạch timeline */
+      }
+
+      .dark-mode .timeline-dot {
+        background-color: #1ed760;
+        /* Màu chấm timeline */
+      }
+
+      .dark-mode .timeline-date {
+        color: #1ed760;
+        /* Màu ngày tháng */
+      }
+
+      .dark-mode .timeline-content {
+        background-color: #2f363e;
+        /* Màu nền nội dung timeline */
+      }
+
+      .dark-mode .timeline-content h3 {
+        color: #ffffff;
+        /* Màu tiêu đề */
+      }
+
+      .dark-mode .timeline-content p {
+        color: #c8c8c8;
+        /* Màu nội dung */
+      }
+
+      .verified-badge {
+        position: relative;
+        display: block;
+        padding-bottom: 4px;
+        border-radius: 999px;
+      }
+
+      .verified-badge svg {
+        vertical-align: middle;
+        fill: #1db954;
+        /* Màu xanh lá cây như ai đó */
+      }
+
+      .verified-message {
+        position: absolute;
+        top: -30px;
+        right: 50%;
+        background-color: #1db954;
+        /* Màu xanh lá cây như ai đó */
+        color: white;
+        padding: 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+        z-index: 4;
+        display: none;
+      }
+
+      .verified-badge:hover .verified-message {
+        display: block;
+      }
+
+      .verified-message a {
+        text-decoration: none;
+        color: white;
+      }
+
+      .scrollable-container {
+        width: 300px;
+        /* Độ rộng của container */
+        height: 200px;
+        /* Độ cao của container */
+        overflow-y: auto;
+        /* Kích hoạt thanh cuộn dọc */
+        border: 1px solid #ccc;
+        /* Đường viền container */
+        border-radius: 5px;
+        /* Bo tròn góc container */
+        background-color: #f5f5f5;
+        /* Màu nền container */
+      }
+
+      .scrollable-content {
+        padding: 10px;
+        /* Khoảng cách giữa nội dung và biên container */
+      }
+
+      /* Tuỳ chỉnh thanh cuộn */
+      ::-webkit-scrollbar {
+        width: 8px;
+        /* Độ rộng của thanh cuộn */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: #888;
+        /* Màu của thanh cuộn */
+        border-radius: 4px;
+        /* Bo tròn góc của thanh cuộn */
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+        /* Màu của thanh cuộn khi rê chuột */
+      }
+
+      .light-mode {
+        background-color: #fefaf5;
+        /* Màu nền chế độ sáng */
+        color: #ffffff;
+        /* Màu chữ chế độ sáng */
+      }
+
+      .light-mode .timeline-section {
+        background-color: #fefaf5;
+        /* Màu nền chế độ sáng cho phần timeline */
+        color: #ffffff;
+        /* Màu chữ chế độ sáng cho phần timeline */
+      }
+
+      .light-mode .timeline-item {
+        color: #ffffff;
+        /* Màu chữ chế độ sáng cho mỗi item trong timeline */
+      }
+
+      .light-mode .timeline-content {
+        background-color: #2f363e;
+        /* Màu nền nội dung timeline */
+      }
+
+      .light-mode .timeline-content h3 {
+        color: #ffffff;
+        /* Màu tiêu đề */
+      }
+
+      .light-mode .timeline-content p {
+        color: #c8c8c8;
+        /* Màu nội dung */
+      }
+
+      p#right {
+        text-align: left;
+      }
+
+      h1 {
+        background-color: transparent !important;
+        margin-bottom: 0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light nav nav-fill justify-content-between" id="nav">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="index.html" id="brand">
+              <script>
+                  indexTranslate("brand")
+              </script>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="index.html" id="home">
+                          <script>
+                              indexTranslate("home")
+                          </script>
+                      </a>
+                  </li> 
+                  <li class="nav-item">
+                      <a class="nav-link" href="element.html" id="details">
+                        <script>
+                          indexTranslate("details");
+                        </script>
+                      </a>
+                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link active" href="his.html" id="history">
+                          <script>
+                              indexTranslate("history")
+                          </script>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="contact.html" id="contact">
+                          <script>
+                              indexTranslate("contact")
+                          </script>
+                      </a>
+                  </li>
+                  <li class="nav-item" id="switch">
+                      <abbr title="">
+                          <button class="btn btn-sm btn-outline-secondary btn-toggle" type="button" id="mode">
+                              <script>
+                                  indexTranslate("mode")
+                              </script>
+                          </button>
+                      </abbr>
+                  </li>
+                  <li class="nav-item" style="padding-left: 5px;">
+                      <button class="btn btn-sm btn-outline-secondary btn-toggle" type="button" id="lang" onclick="language()">
+                          <script>
+                              indexTranslate("lang")
+                          </script>
+                      </button>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+    <h1 id="title4">
+      <script> 
+      historyTranslate("title4");
+      </script>
+    </h1>
+    <section class="timeline-section">
+      <div class="timeline-items">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">1803</div>
+          <div class="timeline-content">
+            <h3 id="e1_title">
+              <script>
+                historyTranslate("e1_title");
+              </script>
+            </h3>
+            <div class="verified-badge">
+              <svg
+                viewBox="0 0 12 13"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <g fill-rule="evenodd" transform="translate(-98 -917)">
+                  <path
+                    d="m106.853 922.354-3.5 3.5a.499.499 0 0 1-.706 0l-1.5-1.5a.5.5 0 1 1 .706-.708l1.147 1.147 3.147-3.147a.5.5 0 1 1 .706.708m3.078 2.295-.589-1.149.588-1.15a.633.633 0 0 0-.219-.82l-1.085-.7-.065-1.287a.627.627 0 0 0-.6-.603l-1.29-.066-.703-1.087a.636.636 0 0 0-.82-.217l-1.148.588-1.15-.588a.631.631 0 0 0-.82.22l-.701 1.085-1.289.065a.626.626 0 0 0-.6.6l-.066 1.29-1.088.702a.634.634 0 0 0-.216.82l.588 1.149-.588 1.15a.632.632 0 0 0 .219.819l1.085.701.065 1.286c.014.33.274.59.6.604l1.29.065.703 1.088c.177.27.53.362.82.216l1.148-.588 1.15.589a.629.629 0 0 0 .82-.22l.701-1.085 1.286-.064a.627.627 0 0 0 .604-.601l.065-1.29 1.088-.703a.633.633 0 0 0 .216-.819"
+                  ></path>
+                </g>
+              </svg>
+              <a
+                href="https://brilliant.org/wiki/daltons-atomic-model/"
+                target="_blank"
+              >
+                <div class="verified-message">
+                  This information is verified by Brilliant.org
+                </div>
+              </a>
+            </div>
+            <p id="e1_content">
+              <script>
+                historyTranslate("e1_content");
+              </script>
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">1829</div>
+          <div class="timeline-content">
+            <h3 id="e2_title">
+              <script>
+                historyTranslate("e2_title");
+              </script>
+            </h3>
+            <div class="verified-badge">
+              <svg
+                viewBox="0 0 12 13"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <g fill-rule="evenodd" transform="translate(-98 -917)">
+                  <path
+                    d="m106.853 922.354-3.5 3.5a.499.499 0 0 1-.706 0l-1.5-1.5a.5.5 0 1 1 .706-.708l1.147 1.147 3.147-3.147a.5.5 0 1 1 .706.708m3.078 2.295-.589-1.149.588-1.15a.633.633 0 0 0-.219-.82l-1.085-.7-.065-1.287a.627.627 0 0 0-.6-.603l-1.29-.066-.703-1.087a.636.636 0 0 0-.82-.217l-1.148.588-1.15-.588a.631.631 0 0 0-.82.22l-.701 1.085-1.289.065a.626.626 0 0 0-.6.6l-.066 1.29-1.088.702a.634.634 0 0 0-.216.82l.588 1.149-.588 1.15a.632.632 0 0 0 .219.819l1.085.701.065 1.286c.014.33.274.59.6.604l1.29.065.703 1.088c.177.27.53.362.82.216l1.148-.588 1.15.589a.629.629 0 0 0 .82-.22l.701-1.085 1.286-.064a.627.627 0 0 0 .604-.601l.065-1.29 1.088-.703a.633.633 0 0 0 .216-.819"
+                  ></path>
+                </g>
+              </svg>
+              <div class="verified-message">
+                <a
+                  href="https://www.geeksforgeeks.org/dobereiners-triads-definition-types-limitations/"
+                  target="_blank"
+                >
+                  This information is verified by geeksforgeeks.org
+                </a>
+              </div>
+            </div>
+            <p id="e2_content">
+              <script>
+                historyTranslate("e2_content");
+              </script>
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">1862</div>
+          <div class="timeline-content">
+            <h3 id="e3_title">
+              <script>
+                historyTranslate("e3_title");
+              </script>
+            </h3>
+            <div class="verified-badge">
+              <svg
+                viewBox="0 0 12 13"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <g fill-rule="evenodd" transform="translate(-98 -917)">
+                  <path
+                    d="m106.853 922.354-3.5 3.5a.499.499 0 0 1-.706 0l-1.5-1.5a.5.5 0 1 1 .706-.708l1.147 1.147 3.147-3.147a.5.5 0 1 1 .706.708m3.078 2.295-.589-1.149.588-1.15a.633.633 0 0 0-.219-.82l-1.085-.7-.065-1.287a.627.627 0 0 0-.6-.603l-1.29-.066-.703-1.087a.636.636 0 0 0-.82-.217l-1.148.588-1.15-.588a.631.631 0 0 0-.82.22l-.701 1.085-1.289.065a.626.626 0 0 0-.6.6l-.066 1.29-1.088.702a.634.634 0 0 0-.216.82l.588 1.149-.588 1.15a.632.632 0 0 0 .219.819l1.085.701.065 1.286c.014.33.274.59.6.604l1.29.065.703 1.088c.177.27.53.362.82.216l1.148-.588 1.15.589a.629.629 0 0 0 .82-.22l.701-1.085 1.286-.064a.627.627 0 0 0 .604-.601l.065-1.29 1.088-.703a.633.633 0 0 0 .216-.819"
+                  ></path>
+                </g>
+              </svg>
+              <div class="verified-message">
+                <a
+                  href="https://elephantandcastle.org.uk/a-brief-history/elements-castle-john-newlands"
+                  target="_blank"
+                >
+                  This information is verified by elephantandcastle.org.uk
+                </a>
+              </div>
+            </div>
+            <p id="e3_content">
+              <script>
+                historyTranslate("e3_content");
+              </script>
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">1864</div>
+          <div class="timeline-content">
+            <h3 id="e4_title">
+              <script>
+                historyTranslate("e4_title");
+              </script>
+            </h3>
+            <div class="verified-badge">
+              <svg
+                viewBox="0 0 12 13"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <g fill-rule="evenodd" transform="translate(-98 -917)">
+                  <path
+                    d="m106.853 922.354-3.5 3.5a.499.499 0 0 1-.706 0l-1.5-1.5a.5.5 0 1 1 .706-.708l1.147 1.147 3.147-3.147a.5.5 0 1 1 .706.708m3.078 2.295-.589-1.149.588-1.15a.633.633 0 0 0-.219-.82l-1.085-.7-.065-1.287a.627.627 0 0 0-.6-.603l-1.29-.066-.703-1.087a.636.636 0 0 0-.82-.217l-1.148.588-1.15-.588a.631.631 0 0 0-.82.22l-.701 1.085-1.289.065a.626.626 0 0 0-.6.6l-.066 1.29-1.088.702a.634.634 0 0 0-.216.82l.588 1.149-.588 1.15a.632.632 0 0 0 .219.819l1.085.701.065 1.286c.014.33.274.59.6.604l1.29.065.703 1.088c.177.27.53.362.82.216l1.148-.588 1.15.589a.629.629 0 0 0 .82-.22l.701-1.085 1.286-.064a.627.627 0 0 0 .604-.601l.065-1.29 1.088-.703a.633.633 0 0 0 .216-.819"
+                  ></path>
+                </g>
+              </svg>
+              <div class="verified-message">
+                <a
+                  href="https://www.whipplelib.hps.cam.ac.uk/special/exhibitions-and-displays/curating-chemical-elements"
+                  target="_blank"
+                >
+                  This information is verified by whipplelib.hps.cam.ac.uk
+                </a>
+              </div>
+            </div>
+            <p id="e4_content">
+              <script>
+                historyTranslate("e4_content");
+              </script>
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">1869</div>
+          <div class="timeline-content">
+            <h3 id="e5_title">
+              <script>
+                historyTranslate("e5_title");
+              </script>
+            </h3>
+            <div class="verified-badge">
+              <svg
+                viewBox="0 0 12 13"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <g fill-rule="evenodd" transform="translate(-98 -917)">
+                  <path
+                    d="m106.853 922.354-3.5 3.5a.499.499 0 0 1-.706 0l-1.5-1.5a.5.5 0 1 1 .706-.708l1.147 1.147 3.147-3.147a.5.5 0 1 1 .706.708m3.078 2.295-.589-1.149.588-1.15a.633.633 0 0 0-.219-.82l-1.085-.7-.065-1.287a.627.627 0 0 0-.6-.603l-1.29-.066-.703-1.087a.636.636 0 0 0-.82-.217l-1.148.588-1.15-.588a.631.631 0 0 0-.82.22l-.701 1.085-1.289.065a.626.626 0 0 0-.6.6l-.066 1.29-1.088.702a.634.634 0 0 0-.216.82l.588 1.149-.588 1.15a.632.632 0 0 0 .219.819l1.085.701.065 1.286c.014.33.274.59.6.604l1.29.065.703 1.088c.177.27.53.362.82.216l1.148-.588 1.15.589a.629.629 0 0 0 .82-.22l.701-1.085 1.286-.064a.627.627 0 0 0 .604-.601l.065-1.29 1.088-.703a.633.633 0 0 0 .216-.819"
+                  ></path>
+                </g>
+              </svg>
+              <div class="verified-message">
+                <a
+                  href="https://www.vaia.com/en-us/textbooks/chemistry/chemistry-matter-and-change-2007-edition/chapter-6/problem-27-lothar-meyer-and-dmitri-mendeleev-both-proposed-s/ "
+                  target="_blank"
+                >
+                  This information is verified by vaia.com
+                </a>
+              </div>
+            </div>
+            <p id="e5_content">
+              <script>
+                historyTranslate("e5_content");
+              </script>
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">1913</div>
+          <div class="timeline-content">
+            <h3 id="e6_title">
+              <script>
+                historyTranslate("e6_title");
+              </script>
+            </h3>
+            <div class="verified-badge">
+              <svg
+                viewBox="0 0 12 13"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <g fill-rule="evenodd" transform="translate(-98 -917)">
+                  <path
+                    d="m106.853 922.354-3.5 3.5a.499.499 0 0 1-.706 0l-1.5-1.5a.5.5 0 1 1 .706-.708l1.147 1.147 3.147-3.147a.5.5 0 1 1 .706.708m3.078 2.295-.589-1.149.588-1.15a.633.633 0 0 0-.219-.82l-1.085-.7-.065-1.287a.627.627 0 0 0-.6-.603l-1.29-.066-.703-1.087a.636.636 0 0 0-.82-.217l-1.148.588-1.15-.588a.631.631 0 0 0-.82.22l-.701 1.085-1.289.065a.626.626 0 0 0-.6.6l-.066 1.29-1.088.702a.634.634 0 0 0-.216.82l.588 1.149-.588 1.15a.632.632 0 0 0 .219.819l1.085.701.065 1.286c.014.33.274.59.6.604l1.29.065.703 1.088c.177.27.53.362.82.216l1.148-.588 1.15.589a.629.629 0 0 0 .82-.22l.701-1.085 1.286-.064a.627.627 0 0 0 .604-.601l.065-1.29 1.088-.703a.633.633 0 0 0 .216-.819"
+                  ></path>
+                </g>
+              </svg>
+              <div class="verified-message">
+                <a
+                  href="https://study.com/academy/lesson/henry-moseley-biography-atomic-theory.html"
+                  target="_blank"
+                >
+                  This information is verified by study.com
+                </a>
+              </div>
+            </div>
+            <p id="e6_content">
+              <script>
+                historyTranslate("e6_content");
+              </script>
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">1910—1930</div>
+          <div class="timeline-content">
+            <h3 id="e7_title">
+              <script>
+                historyTranslate("e7_title");
+              </script>
+            </h3>
+            <div class="verified-badge">
+              <svg
+                viewBox="0 0 12 13"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <g fill-rule="evenodd" transform="translate(-98 -917)">
+                  <path
+                    d="m106.853 922.354-3.5 3.5a.499.499 0 0 1-.706 0l-1.5-1.5a.5.5 0 1 1 .706-.708l1.147 1.147 3.147-3.147a.5.5 0 1 1 .706.708m3.078 2.295-.589-1.149.588-1.15a.633.633 0 0 0-.219-.82l-1.085-.7-.065-1.287a.627.627 0 0 0-.6-.603l-1.29-.066-.703-1.087a.636.636 0 0 0-.82-.217l-1.148.588-1.15-.588a.631.631 0 0 0-.82.22l-.701 1.085-1.289.065a.626.626 0 0 0-.6.6l-.066 1.29-1.088.702a.634.634 0 0 0-.216.82l.588 1.149-.588 1.15a.632.632 0 0 0 .219.819l1.085.701.065 1.286c.014.33.274.59.6.604l1.29.065.703 1.088c.177.27.53.362.82.216l1.148-.588 1.15.589a.629.629 0 0 0 .82-.22l.701-1.085 1.286-.064a.627.627 0 0 0 .604-.601l.065-1.29 1.088-.703a.633.633 0 0 0 .216-.819"
+                  ></path>
+                </g>
+              </svg>
+              <div class="verified-message">
+                <a
+                  href=" https://www.lenntech.com/periodic/history/history-periodic-table "
+                  target="_blank"
+                >
+                  This information is verified by lenntech.com
+                </a>
+              </div>
+            </div>
+            <p id="e7_content">
+              <script>
+                historyTranslate("e7_content");
+              </script>
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">1940—1970</div>
+          <div class="timeline-content">
+            <h3 id="e8_title">
+              <script>
+                historyTranslate("e8_title");
+              </script>
+            </h3>
+            <div class="verified-badge">
+              <svg
+                viewBox="0 0 12 13"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <g fill-rule="evenodd" transform="translate(-98 -917)">
+                  <path
+                    d="m106.853 922.354-3.5 3.5a.499.499 0 0 1-.706 0l-1.5-1.5a.5.5 0 1 1 .706-.708l1.147 1.147 3.147-3.147a.5.5 0 1 1 .706.708m3.078 2.295-.589-1.149.588-1.15a.633.633 0 0 0-.219-.82l-1.085-.7-.065-1.287a.627.627 0 0 0-.6-.603l-1.29-.066-.703-1.087a.636.636 0 0 0-.82-.217l-1.148.588-1.15-.588a.631.631 0 0 0-.82.22l-.701 1.085-1.289.065a.626.626 0 0 0-.6.6l-.066 1.29-1.088.702a.634.634 0 0 0-.216.82l.588 1.149-.588 1.15a.632.632 0 0 0 .219.819l1.085.701.065 1.286c.014.33.274.59.6.604l1.29.065.703 1.088c.177.27.53.362.82.216l1.148-.588 1.15.589a.629.629 0 0 0 .82-.22l.701-1.085 1.286-.064a.627.627 0 0 0 .604-.601l.065-1.29 1.088-.703a.633.633 0 0 0 .216-.819"
+                  ></path>
+                </g>
+              </svg>
+              <div class="verified-message">
+                <a
+                  href=" https://www.lenntech.com/periodic/history/history-periodic-table "
+                  target="_blank"
+                >
+                  This information is verified by lenntech.com
+                </a>
+              </div>
+            </div>
+            <p id="e8_content">
+              <script>
+                historyTranslate("e8_content");
+              </script>
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date" id="now"></div>
+          <div class="timeline-content">
+            <h3 id="e9_title">
+              <script>
+                historyTranslate("e9_title");
+              </script>
+            </h3>
+            <div class="verified-badge">
+              <svg
+                viewBox="0 0 12 13"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <g fill-rule="evenodd" transform="translate(-98 -917)">
+                  <path
+                    d="m106.853 922.354-3.5 3.5a.499.499 0 0 1-.706 0l-1.5-1.5a.5.5 0 1 1 .706-.708l1.147 1.147 3.147-3.147a.5.5 0 1 1 .706.708m3.078 2.295-.589-1.149.588-1.15a.633.633 0 0 0-.219-.82l-1.085-.7-.065-1.287a.627.627 0 0 0-.6-.603l-1.29-.066-.703-1.087a.636.636 0 0 0-.82-.217l-1.148.588-1.15-.588a.631.631 0 0 0-.82.22l-.701 1.085-1.289.065a.626.626 0 0 0-.6.6l-.066 1.29-1.088.702a.634.634 0 0 0-.216.82l.588 1.149-.588 1.15a.632.632 0 0 0 .219.819l1.085.701.065 1.286c.014.33.274.59.6.604l1.29.065.703 1.088c.177.27.53.362.82.216l1.148-.588 1.15.589a.629.629 0 0 0 .82-.22l.701-1.085 1.286-.064a.627.627 0 0 0 .604-.601l.065-1.29 1.088-.703a.633.633 0 0 0 .216-.819"
+                  ></path>
+                </g>
+              </svg>
+              <div class="verified-message">
+                <a
+                  href=" https://www.lenntech.com/periodic/history/history-periodic-table "
+                  target="_blank"
+                >
+                  This information is verified by lenntech.com
+                </a>
+              </div>
+            </div>
+            <p id="e9_content">
+              <script>
+                historyTranslate("e9_content");
+              </script>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <span>2024 ©<a href="index.html">Periodic Table</a></span>
+      <span>∘</span>
+      <span><a href="https://vinschool.edu.vn/" id="intro"><script>indexTranslate("intro")</script></a></span> 
+      <span>∘</span>
+      <span><a href="https://www.facebook.com/minhchau.van.3781/" id = "face"><script>indexTranslate("face")</script></a></span>
+      <span>∘</span>
+      <span><a href="mailto:chau024929@stu.vinschool.edu.vn" id = "mail"><script>indexTranslate("mail")</script></a></span>
+      <span>∘</span>
+      <span><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" style="text-decoration: none !important;" id = "rick"><script>indexTranslate("rick")</script></a></span>
+  </footer>
+    <script>
+      const date = new Date();
+      document.getElementById("now").textContent = "1980".concat(
+        "-",
+        date.getFullYear()
+      );
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleThemeButton = document.getElementById("mode");
+        const body = document.body;
+        // Kiểm tra nếu đã có trạng thái theme trong Local Storage
+        const currentTheme = localStorage.getItem("mode");
+        if (currentTheme) {
+          body.classList.add(currentTheme); // Áp dụng theme từ Local Storage
+          if (currentTheme === "dark-mode") {
+            toggleThemeButton.textContent = "Chế độ ban ngày";
+          }
+        }
+        // Tạo hàm xử lý việc cập nhật trạng thái theme
+        function toggleTheme() {
+          body.classList.toggle("light-mode"); // Thêm/xóa class 'light-mode' thay vì 'dark-mode'
+          const theme = document.getElementById("theme");
+          const nav = document.getElementById("nav");
+          if (theme.getAttribute("href") == "light-mode.css") {
+            theme.setAttribute("href", "dark-mode.css");
+            localStorage.setItem("mode", "dark");
+          } else {
+            theme.setAttribute("href", "light-mode.css");
+            localStorage.setItem("mode", "light");
+          }
+          if (nav.classList.contains("navbar-light")) {
+            nav.classList.remove("navbar-light");
+            nav.classList.add("navbar-dark");
+            nav.classList.add("bg-dark");
+          } else {
+            nav.classList.add("navbar-light");
+            nav.classList.remove("navbar-dark");
+            nav.classList.remove("bg-dark");
+          }
+        }
+        // Gán hàm xử lý vào sự kiện click của nút
+        toggleThemeButton.addEventListener("click", toggleTheme);
+      });
+      window.onload = function () {
+        const body = document.body;
+        let mode = body.classList.item("0");
+        const theme = document.getElementById("theme");
+        const nav = document.getElementById("nav");
+        if (localStorage.getItem("mode") != null) {
+          if (mode != "light-mode") {
+            body.classList.toggle("light-mode");
+          }
+          if (localStorage.getItem("mode") == "light") {
+            theme.href = "light-mode.css";
+            nav.classList.add("navbar-light");
+            nav.classList.remove("navbar-dark");
+            nav.classList.remove("bg-dark");
+          } else {
+            theme.href = "dark-mode.css";
+            nav.classList.remove("navbar-light");
+            nav.classList.add("navbar-dark");
+            nav.classList.add("bg-dark");
+            body.classList.toggle("light-mode");
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

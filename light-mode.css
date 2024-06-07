@@ -1,0 +1,37 @@
+body,
+.nav {
+  background-color: #fefaf5 !important;
+}
+
+h1,
+p,
+a,
+abbr,
+td,
+h3,
+span,
+h5 {
+  color: black;
+}
+
+.border {
+  border: 2px solid black !important;
+}
+
+.glow {
+  box-shadow: 0 8.5px 10px #1c96e8c7;
+}
+
+input {
+  background-color: white !important;
+}
+
+input:focus {
+  color: black !important;
+}
+
+footer a,
+footer span {
+  color: black !important;
+}
+
