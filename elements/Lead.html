@@ -36,7 +36,6 @@
   </head>
   <body>
     <div id= "nav"></div>
-      
     <div class="sidebar">
       <div class="top">
         <div class="logo">
@@ -129,6 +128,13 @@
         <h1>
           Lead
         </h1>
+        <i class='bx bxs-volume-full' id="vol" onclick="playAudio()"></i>
+        <audio id="audio">
+          <source type="audio/mpeg" src="https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/l/lea/lead_/lead__gb_1.mp3">
+        <source type="audio/ogg" src="https://www.oxfordlearnersdictionaries.com/media/english/uk_pron_ogg/l/lea/lead_/lead__gb_1.ogg">
+        Your browser does not support the audio element.
+        </audio>
+        <br>
         <h2 id="group">
           <script>
             elementTranslate("group");
@@ -330,6 +336,9 @@
           <span><script>
             getDiscoverer("Pb");
           </script></span>
+        </div>
+        <div class="col3">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Electron_shell_082_Lead_-_no_label.svg/180px-Electron_shell_082_Lead_-_no_label.svg.png" alt="">
         </div>
       </div>
       <hr />

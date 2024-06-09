@@ -33,93 +33,21 @@
     <script src="..\lang.js"></script>
     <script src="element.js"></script>
     <link rel="stylesheet" id="theme" href="..\light-mode.css" />
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous">
+</script>
+<script>
+  $(function () {
+    $("#nav").load("nav.html");
+    $("#footer").load("footer.html"); 
+  });
+</script>
+
   </head>
   <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-light bg-light nav nav-fill justify-content-between"
-      id="nav"
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand" href="..\index.html" id="brand">
-          <script>
-            indexTranslate("brand");
-          </script>
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                aria-current="page"
-                href="..\index.html"
-                id="home"
-              >
-                <script>
-                  indexTranslate("home");
-                </script>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="..\infor.html" id="details">
-                <script>
-                  indexTranslate("details");
-                </script>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="..\his.html" id="history">
-                <script>
-                  indexTranslate("history");
-                </script>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="..\contact.html" id="contact">
-                <script>
-                  indexTranslate("contact");
-                </script>
-              </a>
-            </li>
-            <li class="nav-item" id="switch">
-              <abbr title="">
-                <button
-                  class="btn btn-sm btn-outline-secondary btn-toggle"
-                  type="button"
-                  id="mode"
-                >
-                  <script>
-                    indexTranslate("mode");
-                  </script>
-                </button>
-              </abbr>
-            </li>
-            <li class="nav-item" style="padding-left: 5px">
-              <button
-                class="btn btn-sm btn-outline-secondary btn-toggle"
-                type="button"
-                id="lang"
-                onclick="language()"
-              >
-                <script>
-                  indexTranslate("lang");
-                </script>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <div id="nav"></div>
     <div class="sidebar">
       <div class="top">
         <div class="logo">
@@ -213,6 +141,13 @@
         <h1>
           Argon
         </h1>
+        <i class='bx bxs-volume-full' id="vol" onclick="playAudio()"></i>
+        <audio id="audio">
+          <source type="audio/mpeg" src="https://dictionary.cambridge.org/vi/media/english/us_pron/u/usa/usarc/usarchi015.mp3">
+        <source type="audio/ogg" src="https://dictionary.cambridge.org/vi/media/english/us_pron_ogg/u/usa/usarc/usarchi015.ogg">
+        Your browser does not support the audio element.
+        </audio>
+        <br>
         <h2 id="group">
           <script>
             elementTranslate("group");
@@ -387,8 +322,7 @@
           </script></span>
         </div>
         <div class="col3">
-          <a title="Pumbaa (original work by Greg Robson), CC BY-SA 2.0 UK &lt;https://creativecommons.org/licenses/by-sa/2.0/uk/deed.en&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Electron_shell_018_Argon.svg"><img width="256" alt="Electron shell 018 Argon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Electron_shell_018_Argon.svg/256px-Electron_shell_018_Argon.svg.png?20060418115754"></a>
-        </div>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Electron_shell_018_Argon_-_no_label.svg/180px-Electron_shell_018_Argon_-_no_label.svg.png" alt="">        </div>
       </div>
       <hr />
       <div class="part" id="elementHistory">
@@ -450,6 +384,7 @@
         </div>
       </div>
       <hr />
+      <div id="footer"></div>
     </div>
   </body>
   <script>
